@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="331.0" prefWidth="600.0" style="-fx-background-color: #CFECEC;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.CreateNewBankAccountPageCLR">
+   <children>
+      <TextField fx:id="OwnerID" layoutX="326.0" layoutY="107.0" prefHeight="26.0" prefWidth="182.0" promptText="OwnerID:" style="-fx-background-color: #307D7E;" />
+      <JFXButton layoutX="-4.0" layoutY="265.0" onMouseClicked="#Register" prefHeight="66.0" prefWidth="302.0" style="-fx-background-color: #7F525D;" text="Register" />
+      <JFXButton layoutX="298.0" layoutY="265.0" onMouseClicked="#SignIn" prefHeight="66.0" prefWidth="302.0" style="-fx-background-color: #686A6C;" text="Sign In" />
+      <Label fx:id="Register" layoutX="186.0" layoutY="218.0" prefHeight="26.0" prefWidth="227.0" style="-fx-background-color: #FBF6D9;" textFill="#ac3030" />
+      <Label prefHeight="82.0" prefWidth="600.0" style="-fx-background-color: #C19A6B;" text="                                  BankAccount Register" textFill="#474636">
+         <font>
+            <Font name="Segoe UI Black" size="20.0" />
+         </font>
+      </Label>
+      <JFXComboBox fx:id="KindBankAccount" layoutX="66.0" layoutY="159.0" prefHeight="26.0" prefWidth="162.0" promptText="Kind BankAccount" style="-fx-background-color: #307D7E;" />
+      <JFXComboBox fx:id="KindBankInterestPercentage" layoutX="326.0" layoutY="159.0" prefHeight="26.0" prefWidth="162.0" promptText="Kind Bank InterestPercentage" style="-fx-background-color: #307D7E;" />
+      <Label fx:id="AccountNumber" layoutX="66.0" layoutY="107.0" prefHeight="26.0" prefWidth="198.0" />
+   </children>
+</AnchorPane>
