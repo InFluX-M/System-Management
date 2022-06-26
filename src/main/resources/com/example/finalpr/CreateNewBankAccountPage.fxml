@@ -20,6 +20,9 @@
       </Label>
       <JFXComboBox fx:id="KindBankAccount" layoutX="66.0" layoutY="159.0" prefHeight="26.0" prefWidth="162.0" promptText="Kind BankAccount" style="-fx-background-color: #307D7E;" />
       <JFXComboBox fx:id="KindBankInterestPercentage" layoutX="326.0" layoutY="159.0" prefHeight="26.0" prefWidth="162.0" promptText="Kind Bank InterestPercentage" style="-fx-background-color: #307D7E;" />
-      <Label fx:id="AccountNumber" layoutX="66.0" layoutY="107.0" prefHeight="26.0" prefWidth="198.0" />
+      <Label fx:id="AccountNumber" layoutX="74.0" layoutY="107.0" prefHeight="26.0" prefWidth="198.0">
+         <font>
+            <Font name="Times New Roman" size="17.0" />
+         </font></Label>
    </children>
 </AnchorPane>

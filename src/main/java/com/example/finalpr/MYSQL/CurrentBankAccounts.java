@@ -1,9 +1,6 @@
 package com.example.finalpr.MYSQL;
 
-import com.example.finalpr.Availabilities.BankCard;
-import com.example.finalpr.Availabilities.CurrentAccount;
-import com.example.finalpr.Availabilities.Estate;
-import com.example.finalpr.Availabilities.Loan;
+import com.example.finalpr.Availabilities.*;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,7 +14,7 @@ public class CurrentBankAccounts {
 
     static public boolean insertCurrentBankAccounts(String accountNumber, String ownerID, double balance, LocalDate dateCreate, int point){
 
-        String sqlCMD = String.format("INSERT INTO currentbankaccounts (accountNumber, ownerID, balance, dateCreate, point) VALUES ('%s', '%s', %f, '"+dateCreate+"', %d')",accountNumber, ownerID, balance, point);
+        String sqlCMD = String.format("INSERT INTO currentbankaccounts (accountNumber, ownerID, balance, dateCreate, point) VALUES ('%s', '%s', %f, '"+dateCreate+"', %d)",accountNumber, ownerID, balance, point);
         return MySQL.executeSQL(sqlCMD);
 
     }
@@ -63,8 +60,44 @@ public class CurrentBankAccounts {
                 loans.add(loan);
             }
 
-            CurrentAccount currentAccount = new CurrentAccount(accountNumber, ownerID, balance, dateCreate, point, bankCard, null);
+            ArrayList<BankCheck> checksSent = new ArrayList<>();
+            String sqlCMD3 = String.format("SELECT checkNumber, accountNumberReceiver, amount, dateRegister, passed FROM bankchecks WHERE accountNumberSender = '%s'", accountNumber);
+            ResultSet resultSet3 = MySQL.executeQuery(sqlCMD3);
+            while(resultSet3.next()){
+                String checkNumber = resultSet3.getString("checkNumber");
+                String accountNumberSender = resultSet3.getString("accountNumberSender");
+                String accountNumberReceiver = resultSet3.getString("accountNumberReceiver");
+                double amount = resultSet3.getDouble("amount");
+                LocalDate dateRegister = resultSet3.getDate("dateRegister").toLocalDate();
+                boolean passed = resultSet3.getBoolean("passed");
+
+                BankCheck bankCheck = new BankCheck(checkNumber, accountNumberSender, accountNumberReceiver, amount, dateRegister);
+                bankCheck.setPassed(passed);
+
+                checksSent.add(bankCheck);
+            }
+
+            ArrayList<BankCheck> checksReceived = new ArrayList<>();
+            String sqlCMD4 = String.format("SELECT checkNumber, accountNumberSender, amount, dateRegister, passed FROM bankchecks WHERE accountNumberReceiver = '%s'", accountNumber);
+            ResultSet resultSet4 = MySQL.executeQuery(sqlCMD4);
+            while(resultSet4.next()){
+                String checkNumber = resultSet3.getString("checkNumber");
+                String accountNumberSender = resultSet3.getString("accountNumberSender");
+                String accountNumberReceiver = resultSet3.getString("accountNumberReceiver");
+                double amount = resultSet3.getDouble("amount");
+                LocalDate dateRegister = resultSet3.getDate("dateRegister").toLocalDate();
+                boolean passed = resultSet3.getBoolean("passed");
+
+                BankCheck bankCheck = new BankCheck(checkNumber, accountNumberSender, accountNumberReceiver, amount, dateRegister);
+                bankCheck.setPassed(passed);
+
+                checksReceived.add(bankCheck);
+            }
+
+            CurrentAccount currentAccount = new CurrentAccount(accountNumber, ownerID, balance, dateCreate, point, bankCard);
             currentAccount.setLoans(loans);
+            currentAccount.setChecksSent(checksSent);
+            currentAccount.setChecksReceived(checksReceived);
 
             bankSystem.getCurrentBankAccounts().add(currentAccount);
         }

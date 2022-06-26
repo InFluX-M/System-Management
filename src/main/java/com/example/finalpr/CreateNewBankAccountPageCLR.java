@@ -29,6 +29,7 @@ public class CreateNewBankAccountPageCLR implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         KindBankAccount.getItems().addAll("CurrentAccount", "SavingAccount", "GoodLoanAccount");
         KindBankInterestPercentage.getItems().addAll("SHORT_TERM", "LONG_TERM", "SPECIAL");
+        AccountNumber.setText("AccountNumber: " + bankSystem.getAccountNumber());
     }
 
     @FXML
@@ -50,7 +51,6 @@ public class CreateNewBankAccountPageCLR implements Initializable {
     void Register(MouseEvent event) {
 
         String accountNumber = bankSystem.getAccountNumber();
-        accountNumber = "5";
         String ownerID = OwnerID.getText();
         double balance = 0.0;
         LocalDate dateCreate = LocalDate.now();
@@ -62,7 +62,7 @@ public class CreateNewBankAccountPageCLR implements Initializable {
         }else{
             if(kind.equals("CurrentAccount")){
 
-                CurrentAccount currentAccount = new CurrentAccount(accountNumber, ownerID, balance, dateCreate, point, null, null);
+                CurrentAccount currentAccount = new CurrentAccount(accountNumber, ownerID, balance, dateCreate, point, null);
                 bankSystem.addCurrentBankAccount(currentAccount);
             }
             else if(kind.equals("SavingAccount")){

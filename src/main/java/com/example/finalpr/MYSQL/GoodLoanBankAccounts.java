@@ -16,7 +16,7 @@ public class GoodLoanBankAccounts {
 
     static public boolean insertGoodLoanBankAccounts(String accountNumber, String ownerID, double balance, LocalDate dateCreate, int point){
 
-        String sqlCMD = String.format("INSERT INTO goodloanbankaccount (accountNumber, ownerID, balance, dateCreate, point) VALUES ('%s', '%s', %f, '"+dateCreate+"', %d')",accountNumber, ownerID, balance, point);
+        String sqlCMD = String.format("INSERT INTO goodloanbankaccount (accountNumber, ownerID, balance, dateCreate, point) VALUES ('%s', '%s', %f, '"+dateCreate+"', %d)",accountNumber, ownerID, balance, point);
         return MySQL.executeSQL(sqlCMD);
 
     }
