@@ -38,11 +38,14 @@ public class CurrentBankAccounts {
             String sqlCMD1 = String.format("SELECT cardNumber, CVV2, expirationDate, ownerID FROM bankcards WHERE accountNumber = '%s'", accountNumber);
             ResultSet resultSet1 = MySQL.executeQuery(sqlCMD1);
 
-            resultSet1.next();
-            String cardNumber = resultSet1.getString("cardNumber");
-            LocalDate expirationDate = resultSet1.getDate("expirationDate").toLocalDate();
-            String CVV2 = resultSet1.getString("CVV2");
-            BankCard bankCard = new BankCard(cardNumber, expirationDate, CVV2);
+            BankCard bankCard = null;
+            if(resultSet1.next()){
+                String cardNumber = resultSet1.getString("cardNumber");
+                LocalDate expirationDate = resultSet1.getDate("expirationDate").toLocalDate();
+                String CVV2 = resultSet1.getString("CVV2");
+                bankCard = new BankCard(cardNumber, expirationDate, CVV2);
+            }
+
 
             ArrayList<Loan> loans = new ArrayList<>();
             String sqlCMD2 = String.format("SELECT loanNumber, amount, numberOfInstallments, numberOfInstallmentsPaid, active FROM loans WHERE accountNumber = '%s'", accountNumber);
@@ -73,5 +76,15 @@ public class CurrentBankAccounts {
 
         String sqlCMD = String.format("UPDATE currentbankaccounts SET ownerID='%s', balance=%f, point=%d, dateCreate='"+dateCreate+"' WHERE accountNumber='%s'", ownerID, balance, point, accountNumber);
         return MySQL.executeSQL(sqlCMD);
+    }
+
+    static public boolean deleteCurrentBankAccounts(String accountNumber){
+
+        String sqlCMD1 = String.format("DELETE FROM loans WHERE accountNumber = '%s'", accountNumber);
+        boolean valid = MySQL.executeSQL(sqlCMD1);
+
+        String sqlCMD = String.format("DELETE FROM currentbankaccounts WHERE accountNumber  = '%s'", accountNumber);
+
+        return MySQL.executeSQL(sqlCMD) && valid;
     }
 }

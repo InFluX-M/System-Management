@@ -50,4 +50,9 @@ public class Estates {
         String sqlCMD = String.format("UPDATE estates SET ownerID='%s', address='%s', date='"+date+"', cost=%f WHERE documentRegistrationCode='%s'",ownerID, addressEstate, cost, documentRegistrationCode);
         return MySQL.executeSQL(sqlCMD);
     }
+
+    static public boolean deleteEstate(String documentRegistrationCode){
+        String sqlCMD = String.format("DELETE FROM estates WHERE documentRegistrationCode = '%s'", documentRegistrationCode);
+        return MySQL.executeSQL(sqlCMD);
+    }
 }

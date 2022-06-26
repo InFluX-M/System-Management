@@ -23,4 +23,9 @@ public class BankCards {
         return MySQL.executeSQL(sqlCMD);
     }
 
+    static public boolean deleteBankCard(String accountNumber){
+        String sqlCMD = String.format("DELETE FROM bankcards WHERE accountNumber = '%s'", accountNumber);
+        return MySQL.executeSQL(sqlCMD);
+    }
+
 }

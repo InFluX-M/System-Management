@@ -16,4 +16,9 @@ public class Loans {
         return MySQL.executeSQL(sqlCMD);
     }
 
+    static public boolean deleteLoan(String loanNumber){
+        String sqlCMD = String.format("DELETE FROM loans WHERE loanNumber = '%s'", loanNumber);
+        return MySQL.executeSQL(sqlCMD);
+    }
+
 }

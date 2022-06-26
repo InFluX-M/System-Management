@@ -77,4 +77,8 @@ public class SavingBankAccounts {
         return MySQL.executeSQL(sqlCMD);
     }
 
+    static public boolean deleteSavingBankAccount(String accountNumber){
+        String sqlCMD = String.format("DELETE FROM savingbankaccount WHERE accountNumber  = '%s'", accountNumber );
+        return MySQL.executeSQL(sqlCMD);
+    }
 }

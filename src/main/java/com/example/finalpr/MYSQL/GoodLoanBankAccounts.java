@@ -79,4 +79,13 @@ public class GoodLoanBankAccounts {
         return MySQL.executeSQL(sqlCMD);
     }
 
+    static public boolean deleteGoodLoanBankAccount(String accountNumber) throws SQLException {
+
+        String sqlCMD1 = String.format("DELETE FROM loans WHERE accountNumber = '%s'", accountNumber);
+        boolean valid = MySQL.executeSQL(sqlCMD1);
+
+        String sqlCMD = String.format("DELETE FROM goodloanbankaccount WHERE accountNumber  = '%s'", accountNumber);
+
+        return MySQL.executeSQL(sqlCMD) && valid;
+    }
 }

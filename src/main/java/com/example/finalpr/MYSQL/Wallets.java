@@ -15,4 +15,8 @@ public class Wallets {
         return MySQL.executeSQL(sqlCMD);
     }
 
+    static public boolean deleteWallets(String ownerID){
+        String sqlCMD = String.format("DELETE FROM wallets WHERE ownerID = '%s'", ownerID);
+        return MySQL.executeSQL(sqlCMD);
+    }
 }

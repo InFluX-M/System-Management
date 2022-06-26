@@ -74,4 +74,9 @@ public class People {
         String sqlCMD = String.format("UPDATE people SET name='%s', age=%d, sex='%s' WHERE ID='%s'",name,age,sex,ID);
         return MySQL.executeSQL(sqlCMD);
     }
+
+    static public boolean deletePerson(String ID){
+        String sqlCMD = String.format("DELETE FROM people WHERE ID = '%s'", ID);
+        return MySQL.executeSQL(sqlCMD);
+    }
 }
