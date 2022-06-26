@@ -35,8 +35,8 @@ public class HelloApplication extends Application {
         documentRegistrationSystem.loadEstates();
         bankSystem.loadBankAccount();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("MainPage.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 700, 475);
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("CreateNewBankAccountPage.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 340, 450);
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();

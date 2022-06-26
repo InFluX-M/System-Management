@@ -1,6 +1,7 @@
 package com.example.finalpr.Systems;
 
 import com.example.finalpr.Availabilities.Estate;
+import com.example.finalpr.Availabilities.Person;
 import com.example.finalpr.MYSQL.Estates;
 import com.example.finalpr.MYSQL.MySQL;
 
@@ -56,5 +57,17 @@ public class DocumentRegistrationSystem {
 
     public static void setSingletonDocumentRegistrationSystem(DocumentRegistrationSystem singletonDocumentRegistrationSystem) {
         DocumentRegistrationSystem.singletonDocumentRegistrationSystem = singletonDocumentRegistrationSystem;
+    }
+
+    public boolean loginEstate(String documentRegistrationCode, String ownerID){
+
+        for(Estate estate : estates){
+            if(documentRegistrationCode.equals(estate.getDocumentRegistrationCode()) && ownerID.equals(estate.getOwnerID())){
+                this.nowEstate = estate;
+                return true;
+            }
+        }
+
+        return false;
     }
 }
