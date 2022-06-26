@@ -42,16 +42,17 @@ public class SavingBankAccounts {
             else if(kind == 2) kindBankInterestPercentage = BankInterestPercentage.SPECIAL;
 
             ArrayList<Loan> loans = new ArrayList<>();
-            String sqlCMD2 = String.format("SELECT amount, numberOfInstallments, numberOfInstallmentsPaid, active FROM loans WHERE accountNumber = '%s'", accountNumber);
+            String sqlCMD2 = String.format("SELECT loanNumber, amount, numberOfInstallments, numberOfInstallmentsPaid, active FROM loans WHERE accountNumber = '%s'", accountNumber);
             ResultSet resultSet2 = MySQL.executeQuery(sqlCMD2);
             while(resultSet2.next()){
 
+                String loanNumber = resultSet2.getString("loanNumber");
                 double amount = resultSet2.getDouble("amount");
                 int numberOfInstallments = resultSet2.getInt("numberOfInstallments");
                 int numberOfInstallmentsPaid = resultSet2.getInt("numberOfInstallmentsPaid");
                 boolean active = resultSet2.getBoolean("active");
 
-                Loan loan = new Loan(amount, numberOfInstallments, active);
+                Loan loan = new Loan(loanNumber, amount, numberOfInstallments, active);
                 loan.setNumberOfInstallmentsPaid(numberOfInstallmentsPaid);
                 loans.add(loan);
             }
@@ -63,6 +64,17 @@ public class SavingBankAccounts {
         }
 
         return true;
+    }
+
+    static public boolean updateSavingBankAccounts(String accountNumber, String ownerID, double balance, LocalDate dateCreate, int point, double bankInterestPercentage, BankInterestPercentage kindBankInterestPercentage, int designatedTime){
+
+        int kind = 0;
+        if(kindBankInterestPercentage == BankInterestPercentage.SHORT_TERM) kind = 0;
+        else if(kindBankInterestPercentage == BankInterestPercentage.LONG_TERM) kind = 1;
+        else if(kindBankInterestPercentage == BankInterestPercentage.SPECIAL) kind = 2;
+
+        String sqlCMD = String.format("UPDATE savingbankaccount SET ownerID='%s', balance=%f, point=%d, dateCreate='"+dateCreate+"', bankInterestPercentage=%f, kindBankInterestPercentage=%d, designatedTime=%d WHERE accountNumber='%s'", ownerID, balance, point, bankInterestPercentage, kind, designatedTime, accountNumber);
+        return MySQL.executeSQL(sqlCMD);
     }
 
 }

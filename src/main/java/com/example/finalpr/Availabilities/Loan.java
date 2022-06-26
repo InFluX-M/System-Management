@@ -2,12 +2,14 @@ package com.example.finalpr.Availabilities;
 
 public class Loan {
 
+    private String loanNumber;
     private double amount;
     private int numberOfInstallments;
     private int numberOfInstallmentsPaid;
     private boolean active;
 
-    public Loan(double amount, int numberOfInstallments, boolean active) {
+    public Loan(String loanNumber, double amount, int numberOfInstallments, boolean active) {
+        this.loanNumber = loanNumber;
         this.amount = amount;
         this.numberOfInstallments = numberOfInstallments;
         this.numberOfInstallmentsPaid = 0;
@@ -40,5 +42,12 @@ public class Loan {
     }
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public String getLoanNumber() {
+        return loanNumber;
+    }
+    public void setLoanNumber(String loanNumber) {
+        this.loanNumber = loanNumber;
     }
 }

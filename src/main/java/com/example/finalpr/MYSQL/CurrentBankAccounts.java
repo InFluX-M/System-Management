@@ -45,16 +45,17 @@ public class CurrentBankAccounts {
             BankCard bankCard = new BankCard(cardNumber, expirationDate, CVV2);
 
             ArrayList<Loan> loans = new ArrayList<>();
-            String sqlCMD2 = String.format("SELECT amount, numberOfInstallments, numberOfInstallmentsPaid, active FROM loans WHERE accountNumber = '%s'", accountNumber);
+            String sqlCMD2 = String.format("SELECT loanNumber, amount, numberOfInstallments, numberOfInstallmentsPaid, active FROM loans WHERE accountNumber = '%s'", accountNumber);
             ResultSet resultSet2 = MySQL.executeQuery(sqlCMD2);
             while(resultSet2.next()){
 
+                String loanNumber = resultSet2.getString("loanNumber");
                 double amount = resultSet2.getDouble("amount");
                 int numberOfInstallments = resultSet2.getInt("numberOfInstallments");
                 int numberOfInstallmentsPaid = resultSet2.getInt("numberOfInstallmentsPaid");
                 boolean active = resultSet2.getBoolean("active");
 
-                Loan loan = new Loan(amount, numberOfInstallments, active);
+                Loan loan = new Loan(loanNumber, amount, numberOfInstallments, active);
                 loan.setNumberOfInstallmentsPaid(numberOfInstallmentsPaid);
                 loans.add(loan);
             }
@@ -68,4 +69,9 @@ public class CurrentBankAccounts {
         return true;
     }
 
+    static public boolean updateCurrentBankAccounts(String accountNumber, String ownerID, double balance, LocalDate dateCreate, int point){
+
+        String sqlCMD = String.format("UPDATE currentbankaccounts SET ownerID='%s', balance=%f, point=%d, dateCreate='"+dateCreate+"' WHERE accountNumber='%s'", ownerID, balance, point, accountNumber);
+        return MySQL.executeSQL(sqlCMD);
+    }
 }

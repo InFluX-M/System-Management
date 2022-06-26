@@ -10,34 +10,17 @@ import static com.example.finalpr.HelloApplication.documentRegistrationSystem;
 
 public class BankCards {
 
-    static public boolean insertBankCard(String accountNumber, String ownerID, String addressEstate, LocalDate date, double cost){
+    static public boolean insertBankCard(String cardNumber, LocalDate expirationDate, String CVV2, String ownerID, String accountNumber){
 
-        String sqlCMD = String.format("INSERT INTO estates (documentRegistrationCode, ownerID, address, date, cost) VALUES ('%s', '%s', '%s', '"+date+"', '"+cost+"')",accountNumber, ownerID, addressEstate);
+        String sqlCMD = String.format("INSERT INTO bankcards (cardNumber, CVV2, ownerID, accountNumber, expirationDate) VALUES ('%s', '%s', '%s', '%s', '"+expirationDate+"')",cardNumber, CVV2, ownerID, accountNumber);
         return MySQL.executeSQL(sqlCMD);
 
     }
 
-    static public boolean loadBankCards() throws SQLException {
+    static public boolean updateBankCard(String cardNumber, LocalDate expirationDate, String CVV2, String ownerID, String accountNumber){
 
-
-        String sqlCMD = "SELECT documentRegistrationCode, ownerID, address, date, cost FROM estates";
-        ResultSet resultSet = MySQL.executeQuery(sqlCMD);
-
-        while(resultSet.next()){
-
-            String documentRegistrationCode = resultSet.getString("documentRegistrationCode");
-            String ownerID = resultSet.getString("ownerID");
-            String address = resultSet.getString("address");
-            LocalDate date = resultSet.getDate("date").toLocalDate();
-            double cost = resultSet.getDouble("cost");
-
-            Estate estate = new Estate(documentRegistrationCode, ownerID, address, date, cost);
-
-            documentRegistrationSystem.getEstates().add(estate);
-        }
-
-
-        return true;
+        String sqlCMD = String.format("UPDATE bankcards SET ownerID='%s', cardNumber='%s', CVV2='%s', expirationDate='"+expirationDate+"' WHERE accountNumber='%s'",ownerID,cardNumber,CVV2,accountNumber);
+        return MySQL.executeSQL(sqlCMD);
     }
 
 }

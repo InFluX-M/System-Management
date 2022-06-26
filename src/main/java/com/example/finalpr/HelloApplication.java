@@ -1,8 +1,10 @@
 package com.example.finalpr;
 
+import com.example.finalpr.Availabilities.BankInterestPercentage;
+import com.example.finalpr.Availabilities.Estate;
 import com.example.finalpr.Availabilities.Loan;
 import com.example.finalpr.Availabilities.Person;
-import com.example.finalpr.MYSQL.People;
+import com.example.finalpr.MYSQL.*;
 import com.example.finalpr.Systems.BankSystem;
 import com.example.finalpr.Systems.CivilRegistrationSystem;
 import com.example.finalpr.Systems.DocumentRegistrationSystem;
@@ -16,6 +18,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -31,6 +34,7 @@ public class HelloApplication extends Application {
         civilRegistrationSystem.LoadPeople();
         documentRegistrationSystem.loadEstates();
         bankSystem.loadBankAccount();
+
 
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("MainPage.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 700, 475);

@@ -45,4 +45,9 @@ public class Estates {
         return true;
     }
 
+    static public boolean updateEstate(String documentRegistrationCode, String ownerID, String addressEstate, LocalDate date, double cost){
+
+        String sqlCMD = String.format("UPDATE estates SET ownerID='%s', address='%s', date='"+date+"', cost=%f WHERE documentRegistrationCode='%s'",ownerID, addressEstate, cost, documentRegistrationCode);
+        return MySQL.executeSQL(sqlCMD);
+    }
 }

@@ -69,5 +69,9 @@ public class People {
         return true;
     }
 
+    static public boolean updatePerson(String ID, String name, int age, String sex){
 
+        String sqlCMD = String.format("UPDATE people SET name='%s', age=%d, sex='%s' WHERE ID='%s'",name,age,sex,ID);
+        return MySQL.executeSQL(sqlCMD);
+    }
 }
