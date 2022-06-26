@@ -36,7 +36,6 @@ public class CivilRegistrationSystem {
     public Person getNowPerson() {
         return nowPerson;
     }
-
     public void setNowPerson(Person nowPerson) {
         this.nowPerson = nowPerson;
     }
@@ -44,7 +43,6 @@ public class CivilRegistrationSystem {
     public ArrayList<Person> getPeople() {
         return people;
     }
-
     public void setPeople(ArrayList<Person> people) {
         this.people = people;
     }
@@ -52,8 +50,20 @@ public class CivilRegistrationSystem {
     public static CivilRegistrationSystem getSingletonCivilRegistrationSystem() {
         return singletonCivilRegistrationSystem;
     }
-
     public static void setSingletonCivilRegistrationSystem(CivilRegistrationSystem singletonCivilRegistrationSystem) {
         CivilRegistrationSystem.singletonCivilRegistrationSystem = singletonCivilRegistrationSystem;
     }
+
+    public boolean loginPerson(String ID, String name){
+
+        for(Person person : people){
+            if(ID.equals(person.getID()) && name.equals(person.getName())){
+                this.nowPerson = person;
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 }
