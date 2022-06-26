@@ -1,11 +1,9 @@
-package com.example;
+package com.example.finalpr;
 
 import com.example.finalpr.Availabilities.BankInterestPercentage;
 import com.example.finalpr.Availabilities.CurrentAccount;
 import com.example.finalpr.Availabilities.GoodLoanAccount;
 import com.example.finalpr.Availabilities.SavingAccount;
-import com.example.finalpr.MYSQL.CurrentBankAccounts;
-import com.example.finalpr.MYSQL.SavingBankAccounts;
 import com.jfoenix.controls.JFXComboBox;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -109,3 +107,4 @@ public class CreateNewBankAccountPageCLR implements Initializable {
     }
 
 }
+

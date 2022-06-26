@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="331.0" prefWidth="600.0" style="-fx-background-color: #CFECEC;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.CreateNewBankAccountPageCLR">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="331.0" prefWidth="600.0" style="-fx-background-color: #CFECEC;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.finalpr.CreateNewBankAccountPageCLR">
    <children>
       <TextField fx:id="OwnerID" layoutX="326.0" layoutY="107.0" prefHeight="26.0" prefWidth="182.0" promptText="OwnerID:" style="-fx-background-color: #307D7E;" />
       <JFXButton layoutX="-4.0" layoutY="265.0" onMouseClicked="#Register" prefHeight="66.0" prefWidth="302.0" style="-fx-background-color: #7F525D;" text="Register" />
