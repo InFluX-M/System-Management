@@ -46,7 +46,7 @@ public class LoginPageCLR implements Initializable {
 
     @FXML
     void createNewProfile(MouseEvent event) {
-        System.out.println("Hi");
+
         try {
             Parent root = FXMLLoader.load(getClass().getResource("CreateNewBankAccountPage.fxml"));
             Stage s1 = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -75,6 +75,16 @@ public class LoginPageCLR implements Initializable {
 
                 if(accountNumber.equals("admin") && ownerID.equals("admin")){
 
+                    try {
+                        Parent root = FXMLLoader.load(getClass().getResource("MainPanelAdmin.fxml"));
+                        Stage s1 = (Stage) ((Node)event.getSource()).getScene().getWindow();
+                        Scene scene = new Scene(root);
+                        s1.setScene(scene);
+                        s1.show();
+                    }
+                    catch (IOException e) {
+
+                    }
 
                 }else{
                     statueLogin.setText("Account Is Not Valid... :(");

@@ -104,7 +104,7 @@ public class CivilRegistrationSystem implements Runnable{
         while(true){
             try {
 
-                Thread.sleep(3000);
+                Thread.sleep(300000);
                 changeDay();
 
             } catch (InterruptedException | IOException e) {
