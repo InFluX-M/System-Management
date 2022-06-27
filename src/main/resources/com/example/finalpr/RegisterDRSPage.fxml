@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="368.0" prefWidth="600.0" style="-fx-background-color: #CFECEC;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.finalpr.RegisterDRSPageCLR">
+   <children>
+      <TextField fx:id="OwnerID" layoutX="358.0" layoutY="104.0" prefHeight="26.0" prefWidth="182.0" promptText="OwnerID:" style="-fx-background-color: #307D7E;" />
+      <TextField fx:id="Cost" layoutX="358.0" layoutY="171.0" prefHeight="26.0" prefWidth="182.0" promptText="Cost:" style="-fx-background-color: #307D7E;" />
+      <TextField fx:id="inputFirstName" layoutX="90.0" layoutY="41.0" prefHeight="26.0" prefWidth="182.0" promptText="Sex:" style="-fx-background-color: #307D7E;" />
+      <JFXButton layoutX="-2.0" layoutY="302.0" onMouseClicked="#register" prefHeight="66.0" prefWidth="302.0" style="-fx-background-color: #7F525D;" text="Register" />
+      <JFXButton layoutX="300.0" layoutY="302.0" onMouseClicked="#back" prefHeight="66.0" prefWidth="302.0" style="-fx-background-color: #686A6C;" text="Back" />
+      <Label fx:id="status" layoutX="170.0" layoutY="249.0" prefHeight="26.0" prefWidth="259.0" style="-fx-background-color: #FBF6D9;" textFill="#ac3030" />
+      <Label prefHeight="82.0" prefWidth="600.0" style="-fx-background-color: #C19A6B;" text="                                       Register Estate" textFill="#474636">
+         <font>
+            <Font name="Segoe UI Black" size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="ID" layoutX="90.0" layoutY="104.0" prefHeight="26.0" prefWidth="198.0">
+         <font>
+            <Font name="Times New Roman" size="17.0" />
+         </font>
+      </Label>
+      <JFXTextArea fx:id="Address" layoutX="72.0" layoutY="157.0" prefHeight="66.0" prefWidth="248.0" promptText="Address:" style="-fx-background-color: #307D7E;" />
+      <Label fx:id="DocumentRegistrationCode" layoutX="82.0" layoutY="104.0" prefHeight="26.0" prefWidth="198.0">
+         <font>
+            <Font name="Times New Roman" size="17.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

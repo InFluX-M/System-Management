@@ -3,6 +3,7 @@ package com.example.finalpr;
 import com.example.finalpr.Systems.BankSystem;
 import com.example.finalpr.Systems.CivilRegistrationSystem;
 import com.example.finalpr.Systems.DocumentRegistrationSystem;
+import com.example.finalpr.Systems.Systems;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -18,11 +19,12 @@ public class HelloApplication extends Application {
     static public BankSystem bankSystem = BankSystem.getInstanceBankSystem();
     static public CivilRegistrationSystem civilRegistrationSystem = CivilRegistrationSystem.getInstanceCivilRegistrationSystem();
     static public DocumentRegistrationSystem documentRegistrationSystem = DocumentRegistrationSystem.getInstanceDocumentRegistrationSystem();
+    static public Systems systems = Systems.getInstanceSystems(bankSystem, civilRegistrationSystem, documentRegistrationSystem);
 
     @Override
     public void start(Stage stage) throws IOException, SQLException, ClassNotFoundException {
 
-//
+
 //        File file1 = new File("DateCRS.txt");
 //        FileOutputStream fileOutputStream1 = new FileOutputStream(file1);
 //        ObjectOutputStream objectOutputStream1 = new ObjectOutputStream(fileOutputStream1);

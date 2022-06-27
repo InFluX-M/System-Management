@@ -90,10 +90,21 @@ public class LoginPageCLR implements Initializable {
                     statueLogin.setText("Account Is Not Valid... :(");
                 }
 
-            }else if(rule.equals("User")){
+            }
+            else if(rule.equals("User")){
 
                 if(bankSystem.loginBankAccount(accountNumber, ownerID)){
 
+                    try {
+                        Parent root = FXMLLoader.load(getClass().getResource("BankAccountPanel.fxml"));
+                        Stage s1 = (Stage) ((Node)event.getSource()).getScene().getWindow();
+                        Scene scene = new Scene(root);
+                        s1.setScene(scene);
+                        s1.show();
+                    }
+                    catch (IOException e) {
+
+                    }
 
                 }else{
                     statueLogin.setText("Account Is Not Valid... :(");

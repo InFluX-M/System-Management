@@ -10,12 +10,11 @@ public class Wallets {
     }
 
     static public boolean updateWallets(String ownerID, double money){
-
         String sqlCMD = String.format("UPDATE wallets SET money=%f WHERE ownerID='%s'", money, ownerID);
         return MySQL.executeSQL(sqlCMD);
     }
 
-    static public boolean deleteWallets(String ownerID){
+    static public boolean deleteWallet(String ownerID){
         String sqlCMD = String.format("DELETE FROM wallets WHERE ownerID = '%s'", ownerID);
         return MySQL.executeSQL(sqlCMD);
     }
