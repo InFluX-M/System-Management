@@ -1,10 +1,5 @@
 package com.example.finalpr;
 
-import com.example.finalpr.Availabilities.BankInterestPercentage;
-import com.example.finalpr.Availabilities.Estate;
-import com.example.finalpr.Availabilities.Loan;
-import com.example.finalpr.Availabilities.Person;
-import com.example.finalpr.MYSQL.*;
 import com.example.finalpr.Systems.BankSystem;
 import com.example.finalpr.Systems.CivilRegistrationSystem;
 import com.example.finalpr.Systems.DocumentRegistrationSystem;
@@ -13,14 +8,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
+import java.io.*;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
+
 
 public class HelloApplication extends Application {
 
@@ -29,11 +20,18 @@ public class HelloApplication extends Application {
     static public DocumentRegistrationSystem documentRegistrationSystem = DocumentRegistrationSystem.getInstanceDocumentRegistrationSystem();
 
     @Override
-    public void start(Stage stage) throws IOException, SQLException {
+    public void start(Stage stage) throws IOException, SQLException, InterruptedException, ClassNotFoundException {
 
         civilRegistrationSystem.LoadPeople();
         documentRegistrationSystem.loadEstates();
         bankSystem.loadBankAccount();
+
+        Thread thread1 = new Thread(bankSystem, "Management Day BankSystem");
+        Thread thread2 = new Thread(civilRegistrationSystem, "Management Day CivilRegistrationSystem");
+        Thread thread3 = new Thread(documentRegistrationSystem, "Management Day DocumentRegistrationSystem");
+        thread1.start();;
+        thread2.start();
+        thread3.start();
 
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("LoginPage.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 340, 450);

@@ -8,7 +8,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import static com.example.finalpr.HelloApplication.bankSystem;
-import static com.example.finalpr.HelloApplication.documentRegistrationSystem;
 
 public class CurrentBankAccounts {
 

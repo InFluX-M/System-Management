@@ -6,13 +6,16 @@ import com.example.finalpr.Availabilities.Wallet;
 import com.example.finalpr.MYSQL.MySQL;
 import com.example.finalpr.MYSQL.People;
 
+import java.io.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 
-public class CivilRegistrationSystem {
+public class CivilRegistrationSystem implements Runnable{
+
+    public static LocalDate localDate = LocalDate.now();
 
     private Person nowPerson;
     private ArrayList<Person> people;
@@ -29,7 +32,15 @@ public class CivilRegistrationSystem {
         return singletonCivilRegistrationSystem;
     }
 
-    public boolean LoadPeople() throws SQLException {
+    public boolean LoadPeople() throws SQLException, IOException, ClassNotFoundException {
+
+        File file = new File("LocalDateCivilRegistrationSystem.txt");
+        FileInputStream fileInputStream = new FileInputStream(file);
+        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+        localDate = (LocalDate) objectInputStream.readObject();
+        objectInputStream.close();
+        fileInputStream.close();
+
         return People.LoadPeople();
     }
 
@@ -66,4 +77,40 @@ public class CivilRegistrationSystem {
         return false;
     }
 
+    public boolean changeDay() throws IOException {
+        int year = localDate.getYear();
+        int month = localDate.getMonthValue();
+        int day = localDate.getDayOfMonth()+1;
+
+        if(day == localDate.lengthOfMonth()+1){
+            month++;
+            day = 1;
+        }
+        localDate = LocalDate.of(year, month, day);
+
+        File file = new File("LocalDateCivilRegistrationSystem.txt");
+        FileOutputStream fileOutputStream = new FileOutputStream(file);
+        ObjectOutputStream dataOutputStream = new ObjectOutputStream(fileOutputStream);
+        dataOutputStream.writeObject(CivilRegistrationSystem.localDate);
+        dataOutputStream.close();
+        fileOutputStream.close();
+
+        return true;
+    }
+
+    @Override
+    public void run() {
+
+        while(true){
+            try {
+
+                Thread.sleep(3000);
+                changeDay();
+
+            } catch (InterruptedException | IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
 }
