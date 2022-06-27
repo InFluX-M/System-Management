@@ -1,8 +1,10 @@
 package com.example.finalpr.Systems;
 
+import com.example.finalpr.Availabilities.CurrentAccount;
 import com.example.finalpr.Availabilities.Estate;
-import com.example.finalpr.MYSQL.Estates;
-import com.example.finalpr.MYSQL.Wallets;
+import com.example.finalpr.Availabilities.GoodLoanAccount;
+import com.example.finalpr.Availabilities.SavingAccount;
+import com.example.finalpr.MYSQL.*;
 
 import java.util.ArrayList;
 
@@ -55,4 +57,35 @@ public class Systems {
         civilRegistrationSystem.searchPerson(estate.getOwnerID()).getWallet().setMoney(money);
         return Wallets.updateWallets(estate.getOwnerID(), money);
     }
+
+    public boolean deposit(double amount){
+
+        double money = civilRegistrationSystem.searchPerson(bankSystem.getNowBankAccount().getOwnerID()).getWallet().getMoney();
+        money -= amount;
+        civilRegistrationSystem.searchPerson(bankSystem.getNowBankAccount().getOwnerID()).getWallet().setMoney(money);
+        Wallets.updateWallets(bankSystem.getNowBankAccount().getOwnerID(), money);
+
+        if(bankSystem.getNowBankAccount() instanceof CurrentAccount){
+            CurrentAccount currentAccount = (CurrentAccount) bankSystem.getNowBankAccount();
+            currentAccount.setBalance(currentAccount.getBalance()+amount);
+            return CurrentBankAccounts.updateCurrentBankAccounts(currentAccount.getAccountNumber(), currentAccount.getOwnerID(),
+                    currentAccount.getBalance(), currentAccount.getDateCreate(), currentAccount.getPoint());
+        }
+        else if(bankSystem.getNowBankAccount() instanceof SavingAccount){
+            SavingAccount savingAccount = (SavingAccount) bankSystem.getNowBankAccount();
+            savingAccount.setBalance(savingAccount.getBalance()+amount);
+            return SavingBankAccounts.updateSavingBankAccounts(savingAccount.getAccountNumber(), savingAccount.getOwnerID(),
+                    savingAccount.getBalance(), savingAccount.getDateCreate(), savingAccount.getPoint(),
+                    savingAccount.getBankInterestPercentage(), savingAccount.getKindBankInterestPercentage(), savingAccount.getDesignatedTime());
+        }
+        else if(bankSystem.getNowBankAccount() instanceof GoodLoanAccount){
+            GoodLoanAccount goodLoanAccount = (GoodLoanAccount) bankSystem.getNowBankAccount();
+            goodLoanAccount.setBalance(goodLoanAccount.getBalance()+amount);
+            return GoodLoanBankAccounts.updateGoodLoanBankAccounts(goodLoanAccount.getAccountNumber(), goodLoanAccount.getOwnerID(),
+                    goodLoanAccount.getBalance(), goodLoanAccount.getDateCreate(), goodLoanAccount.getPoint());
+        }
+
+        return false;
+    }
+
 }
