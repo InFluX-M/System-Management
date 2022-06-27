@@ -34,7 +34,7 @@ public class CivilRegistrationSystem implements Runnable{
 
     public boolean LoadPeople() throws SQLException, IOException, ClassNotFoundException {
 
-        File file = new File("LocalDateCivilRegistrationSystem.txt");
+        File file = new File("DateCRS.txt");
         FileInputStream fileInputStream = new FileInputStream(file);
         ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
         localDate = (LocalDate) objectInputStream.readObject();
@@ -88,7 +88,7 @@ public class CivilRegistrationSystem implements Runnable{
         }
         localDate = LocalDate.of(year, month, day);
 
-        File file = new File("LocalDateCivilRegistrationSystem.txt");
+        File file = new File("DateCRS.txt");
         FileOutputStream fileOutputStream = new FileOutputStream(file);
         ObjectOutputStream dataOutputStream = new ObjectOutputStream(fileOutputStream);
         dataOutputStream.writeObject(CivilRegistrationSystem.localDate);

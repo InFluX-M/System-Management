@@ -34,7 +34,7 @@ public class BankSystem implements Runnable{
         Boolean valid2 = SavingBankAccounts.loadSavingBankAccounts();
         Boolean valid3 = GoodLoanBankAccounts.loadGoodLoanBankAccounts();
 
-        File file = new File("LocalDateBankSystem.txt");
+        File file = new File("DateBS.txt");
         FileInputStream fileInputStream = new FileInputStream(file);
         ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
         localDate = (LocalDate) objectInputStream.readObject();
@@ -143,7 +143,7 @@ public class BankSystem implements Runnable{
         }
         localDate = LocalDate.of(year, month, day);
 
-        File file = new File("LocalDateBankSystem.txt");
+        File file = new File("DateBS.txt");
         FileOutputStream fileOutputStream = new FileOutputStream(file);
         ObjectOutputStream dataOutputStream = new ObjectOutputStream(fileOutputStream);
         dataOutputStream.writeObject(BankSystem.localDate);

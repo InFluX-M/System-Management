@@ -20,8 +20,28 @@ public class HelloApplication extends Application {
     static public DocumentRegistrationSystem documentRegistrationSystem = DocumentRegistrationSystem.getInstanceDocumentRegistrationSystem();
 
     @Override
-    public void start(Stage stage) throws IOException, SQLException, InterruptedException, ClassNotFoundException {
+    public void start(Stage stage) throws IOException, SQLException, ClassNotFoundException {
 
+//        File file1 = new File("DateCRS.txt");
+//        FileOutputStream fileOutputStream1 = new FileOutputStream(file1);
+//        ObjectOutputStream objectOutputStream1 = new ObjectOutputStream(fileOutputStream1);
+//        objectOutputStream1.writeObject(BankSystem.localDate);
+//        objectOutputStream1.close();
+//        fileOutputStream1.close();
+//
+//        File file2 = new File("DateBS.txt");
+//        FileOutputStream fileOutputStream2 = new FileOutputStream(file2);
+//        ObjectOutputStream objectOutputStream2 = new ObjectOutputStream(fileOutputStream2);
+//        objectOutputStream2.writeObject(BankSystem.localDate);
+//        objectOutputStream2.close();
+//        fileOutputStream2.close();
+//
+//        File file3 = new File("DateDRS.txt");
+//        FileOutputStream fileOutputStream3 = new FileOutputStream(file3);
+//        ObjectOutputStream objectOutputStream3 = new ObjectOutputStream(fileOutputStream3);
+//        objectOutputStream3.writeObject(BankSystem.localDate);
+//        objectOutputStream3.close();
+//        fileOutputStream3.close();
         civilRegistrationSystem.LoadPeople();
         documentRegistrationSystem.loadEstates();
         bankSystem.loadBankAccount();
@@ -29,7 +49,7 @@ public class HelloApplication extends Application {
         Thread thread1 = new Thread(bankSystem, "Management Day BankSystem");
         Thread thread2 = new Thread(civilRegistrationSystem, "Management Day CivilRegistrationSystem");
         Thread thread3 = new Thread(documentRegistrationSystem, "Management Day DocumentRegistrationSystem");
-        thread1.start();;
+        thread1.start();
         thread2.start();
         thread3.start();
 
