@@ -67,12 +67,30 @@ public class BankAccountPanelCLR implements Initializable {
 
     @FXML
     void Transfer(MouseEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("TransferPanel.fxml"));
+            Stage s1 = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            s1.setScene(scene);
+            s1.show();
+        }
+        catch (IOException e) {
 
+        }
     }
 
     @FXML
     void Withdrawal(MouseEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("WithdrawalPanel.fxml"));
+            Stage s1 = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            s1.setScene(scene);
+            s1.show();
+        }
+        catch (IOException e) {
 
+        }
     }
 
     @FXML
