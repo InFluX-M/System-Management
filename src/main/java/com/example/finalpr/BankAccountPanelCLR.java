@@ -43,6 +43,12 @@ public class BankAccountPanelCLR implements Initializable {
     private ImageView imgW;
 
     @FXML
+    private ImageView imgL;
+
+    @FXML
+    private ImageView imgS;
+
+    @FXML
     private JFXButton CR;
 
     @FXML
@@ -137,6 +143,16 @@ public class BankAccountPanelCLR implements Initializable {
     }
 
     @FXML
+    void Loans(MouseEvent event) {
+
+    }
+
+    @FXML
+    void Statues(MouseEvent event) {
+
+    }
+
+    @FXML
     void back(MouseEvent event) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("LoginPage.fxml"));
@@ -163,6 +179,9 @@ public class BankAccountPanelCLR implements Initializable {
         Image img4 = new Image("C:\\Users\\Laptopkaran\\Desktop\\Photoo\\CreditCard.png");
         Image img5 = new Image("C:\\Users\\Laptopkaran\\Desktop\\Photoo\\Check.png");
         Image img6 = new Image("C:\\Users\\Laptopkaran\\Desktop\\Photoo\\Check.png");
+        Image img7 = new Image("C:\\Users\\Laptopkaran\\Desktop\\Photoo\\loan.png");
+        Image img8 = new Image("C:\\Users\\Laptopkaran\\Desktop\\Photoo\\check-list.png");
+
 
         imgD.setImage(img1);
         imgW.setImage(img2);
@@ -170,6 +189,8 @@ public class BankAccountPanelCLR implements Initializable {
         imgC.setImage(img4);
         imgG.setImage(img6);
         imgP.setImage(img5);
+        imgL.setImage(img7);
+        imgS.setImage(img8);
 
         if(bankSystem.getNowBankAccount() instanceof GoodLoanAccount){
             GC.setDisable(true);
