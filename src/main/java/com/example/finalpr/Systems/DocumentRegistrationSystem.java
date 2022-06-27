@@ -12,6 +12,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import static com.example.finalpr.HelloApplication.documentRegistrationSystem;
+import static com.example.finalpr.HelloApplication.systems;
 
 public class DocumentRegistrationSystem implements Runnable{
 
@@ -61,10 +62,8 @@ public class DocumentRegistrationSystem implements Runnable{
     }
 
     public boolean deleteEstate(String documentRegistrationCode){
+        systems.deleteEstate(searchEstate(documentRegistrationCode));
         estates.remove(searchEstate(documentRegistrationCode));
-
-
-
         return Estates.deleteEstate(documentRegistrationCode);
     }
 

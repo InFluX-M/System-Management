@@ -10,7 +10,6 @@ public class Wallets {
     }
 
     static public boolean updateWallets(String ownerID, double money){
-
         String sqlCMD = String.format("UPDATE wallets SET money=%f WHERE ownerID='%s'", money, ownerID);
         return MySQL.executeSQL(sqlCMD);
     }
