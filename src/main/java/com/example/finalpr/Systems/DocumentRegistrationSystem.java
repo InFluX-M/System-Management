@@ -12,6 +12,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import static com.example.finalpr.HelloApplication.documentRegistrationSystem;
+import static com.example.finalpr.HelloApplication.systems;
 
 public class DocumentRegistrationSystem implements Runnable{
 
@@ -44,6 +45,34 @@ public class DocumentRegistrationSystem implements Runnable{
         fileInputStream.close();
 
         return Estates.LoadEstates();
+    }
+
+    public boolean addEstate(Estate estate){
+        estates.add(estate);
+        return Estates.insertEstate(estate.getDocumentRegistrationCode(), estate.getOwnerID(), estate.getAddressEstate(), estate.getDate(), estate.getCost());
+    }
+
+    public boolean editEstate(String documentRegistrationCode, String ownerID, String addressEstate, LocalDate date, double cost){
+        Estate estate = searchEstate(documentRegistrationCode);
+        estate.setAddressEstate(addressEstate);
+        estate.setCost(cost);
+        estate.setOwnerID(ownerID);
+        estate.setDate(date);
+        return Estates.updateEstate(estate.getDocumentRegistrationCode(), estate.getOwnerID(), estate.getAddressEstate(), estate.getDate(), estate.getCost());
+    }
+
+    public boolean deleteEstate(String documentRegistrationCode){
+        systems.deleteEstate(searchEstate(documentRegistrationCode));
+        estates.remove(searchEstate(documentRegistrationCode));
+        return Estates.deleteEstate(documentRegistrationCode);
+    }
+
+    public Estate searchEstate(String documentRegistrationCode){
+        for(Estate estate : estates){
+            if(documentRegistrationCode.equals(estate.getDocumentRegistrationCode())) return estate;
+        }
+
+        return null;
     }
 
     public Estate getNowEstate() {
