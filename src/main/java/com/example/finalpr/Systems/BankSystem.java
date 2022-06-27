@@ -28,6 +28,18 @@ public class BankSystem implements Runnable{
         singletonBankSystem = this;
     }
 
+    public BankAccount searchBankAccount(String accountNumber){
+        ArrayList<BankAccount> bankAccounts = new ArrayList<>();
+        bankAccounts.addAll(currentBankAccounts);
+        bankAccounts.addAll(savingAccounts);
+        bankAccounts.addAll(goodLoanAccounts);
+
+        for(BankAccount bankAccount : bankAccounts){
+            if(accountNumber.equals(bankAccount.getAccountNumber())) return bankAccount;
+        }
+        return null;
+    }
+
     public boolean loadBankAccount() throws SQLException, IOException, ClassNotFoundException {
 
         Boolean valid1 = CurrentBankAccounts.loadCurrentBankAccounts();
