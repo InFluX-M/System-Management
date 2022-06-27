@@ -70,7 +70,16 @@ public class CivilRegistrationSystemPageCLR implements Initializable {
 
     @FXML
     void Delete(MouseEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("DeleteCRSPage.fxml"));
+            Stage s1 = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            s1.setScene(scene);
+            s1.show();
+        }
+        catch (IOException e) {
 
+        }
     }
 
 
