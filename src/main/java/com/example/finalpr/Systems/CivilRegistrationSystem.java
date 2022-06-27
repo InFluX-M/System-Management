@@ -44,6 +44,27 @@ public class CivilRegistrationSystem implements Runnable{
         return People.LoadPeople();
     }
 
+    public boolean addPerson(Person person){
+        People.insertPerson(person.getID(), person.getName(), person.getAge(), person.getSex());
+        return people.add(person);
+    }
+
+    public boolean editPerson(String ID, String name, int age, String sex){
+        People.updatePerson(ID, name, age, sex);
+        searchPerson(ID).setName(name);
+        searchPerson(ID).setAge(age);
+        searchPerson(ID).setSex(sex);
+        return true;
+    }
+
+    public Person searchPerson(String ID){
+        for(Person person : people){
+            if(ID.equals(person.getID())) return person;
+        }
+
+        return null;
+    }
+
     public Person getNowPerson() {
         return nowPerson;
     }

@@ -42,12 +42,30 @@ public class CivilRegistrationSystemPageCLR implements Initializable {
 
     @FXML
     void Register(MouseEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("RegisterCRSPage.fxml"));
+            Stage s1 = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            s1.setScene(scene);
+            s1.show();
+        }
+        catch (IOException e) {
 
+        }
     }
 
     @FXML
     void Edit(MouseEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("EditCRSPage.fxml"));
+            Stage s1 = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            s1.setScene(scene);
+            s1.show();
+        }
+        catch (IOException e) {
 
+        }
     }
 
     @FXML
