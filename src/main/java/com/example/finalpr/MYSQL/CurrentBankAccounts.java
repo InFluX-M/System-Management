@@ -64,7 +64,7 @@ public class CurrentBankAccounts {
             ResultSet resultSet3 = MySQL.executeQuery(sqlCMD3);
             while(resultSet3.next()){
                 String checkNumber = resultSet3.getString("checkNumber");
-                String accountNumberSender = resultSet3.getString("accountNumberSender");
+                String accountNumberSender = accountNumber;
                 String accountNumberReceiver = resultSet3.getString("accountNumberReceiver");
                 double amount = resultSet3.getDouble("amount");
                 LocalDate dateRegister = resultSet3.getDate("dateRegister").toLocalDate();
@@ -80,12 +80,12 @@ public class CurrentBankAccounts {
             String sqlCMD4 = String.format("SELECT checkNumber, accountNumberSender, amount, dateRegister, passed FROM bankchecks WHERE accountNumberReceiver = '%s'", accountNumber);
             ResultSet resultSet4 = MySQL.executeQuery(sqlCMD4);
             while(resultSet4.next()){
-                String checkNumber = resultSet3.getString("checkNumber");
-                String accountNumberSender = resultSet3.getString("accountNumberSender");
-                String accountNumberReceiver = resultSet3.getString("accountNumberReceiver");
-                double amount = resultSet3.getDouble("amount");
-                LocalDate dateRegister = resultSet3.getDate("dateRegister").toLocalDate();
-                boolean passed = resultSet3.getBoolean("passed");
+                String checkNumber = resultSet4.getString("checkNumber");
+                String accountNumberSender = resultSet4.getString("accountNumberSender");
+                String accountNumberReceiver = accountNumber;
+                double amount = resultSet4.getDouble("amount");
+                LocalDate dateRegister = resultSet4.getDate("dateRegister").toLocalDate();
+                boolean passed = resultSet4.getBoolean("passed");
 
                 BankCheck bankCheck = new BankCheck(checkNumber, accountNumberSender, accountNumberReceiver, amount, dateRegister);
                 bankCheck.setPassed(passed);

@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.finalpr.PassCheckPanelCLR"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.finalpr.PassCheckPanelCLR">
+   <children>
+      <Label prefHeight="83.0" prefWidth="600.0" style="-fx-background-color: #C19A6B;" text="                                          BankCheck Pass" textFill="#474636">
+         <font>
+            <Font name="Segoe UI Black" size="20.0" />
+         </font>
+      </Label>
+      <JFXListView fx:id="BankCheckList" layoutX="30.0" layoutY="106.0" prefHeight="400.0" prefWidth="540.0" />
+      <JFXButton layoutX="500.0" layoutY="530.0" onMouseClicked="#exit" prefHeight="56.0" prefWidth="85.0" style="-fx-background-color: #7b2b2a;" text="Exit" textFill="WHITE">
+         <font>
+            <Font name="B Aria" size="12.0" />
+         </font>
+      </JFXButton>
+      <JFXButton layoutX="395.0" layoutY="530.0" onMouseClicked="#back" prefHeight="56.0" prefWidth="94.0" style="-fx-background-color: #7F525D;" text="Back" textFill="WHITE" />
+   </children>
 </AnchorPane>

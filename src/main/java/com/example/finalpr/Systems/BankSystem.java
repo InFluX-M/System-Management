@@ -1,10 +1,7 @@
 package com.example.finalpr.Systems;
 
 import com.example.finalpr.Availabilities.*;
-import com.example.finalpr.MYSQL.BankCards;
-import com.example.finalpr.MYSQL.CurrentBankAccounts;
-import com.example.finalpr.MYSQL.GoodLoanBankAccounts;
-import com.example.finalpr.MYSQL.SavingBankAccounts;
+import com.example.finalpr.MYSQL.*;
 
 import java.io.*;
 import java.sql.SQLException;
@@ -27,6 +24,16 @@ public class BankSystem implements Runnable{
         this.goodLoanAccounts = new ArrayList<>();
         this.currentBankAccounts = new ArrayList<>();
         singletonBankSystem = this;
+    }
+
+    public String getCheckNumber(){
+
+        int i=0;
+        for(CurrentAccount currentAccount : currentBankAccounts){
+            i+=currentAccount.getChecksSent().size();
+        }
+
+        return i+"";
     }
 
     public BankAccount searchBankAccount(String accountNumber){
@@ -178,6 +185,13 @@ public class BankSystem implements Runnable{
         return BankCards.insertBankCard(bankCard.getCardNumber(), bankCard.getExpirationDate(), bankCard.getCVV2(),
                 nowBankAccount.getOwnerID(), nowBankAccount.getAccountNumber());
 
+    }
+
+    public boolean giveCheck(BankCheck bankCheck){
+        ((CurrentAccount)searchBankAccount(bankCheck.getAccountNumberSender())).getChecksSent().add(bankCheck);
+        ((CurrentAccount)searchBankAccount(bankCheck.getAccountNumberReceiver())).getChecksReceived().add(bankCheck);
+        return BankChecks.insertBankCheck(bankCheck.getCheckNumber(), bankCheck.getAccountNumberSender(), bankCheck.getAccountNumberReceiver(),
+                bankCheck.getAmount(), bankCheck.getDateRegister(), bankCheck.isPassed());
     }
 
     public boolean changeDay() throws IOException {

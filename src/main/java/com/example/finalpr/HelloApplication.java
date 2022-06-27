@@ -1,5 +1,6 @@
 package com.example.finalpr;
 
+import com.example.finalpr.Availabilities.CurrentAccount;
 import com.example.finalpr.Systems.BankSystem;
 import com.example.finalpr.Systems.CivilRegistrationSystem;
 import com.example.finalpr.Systems.DocumentRegistrationSystem;
@@ -12,6 +13,7 @@ import javafx.stage.Stage;
 import java.io.*;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 
 public class HelloApplication extends Application {
@@ -50,6 +52,7 @@ public class HelloApplication extends Application {
         documentRegistrationSystem.loadEstates();
         bankSystem.loadBankAccount();
 
+        ArrayList<CurrentAccount> b = bankSystem.getCurrentBankAccounts();
         Thread thread1 = new Thread(bankSystem, "Management Day BankSystem");
         Thread thread2 = new Thread(civilRegistrationSystem, "Management Day CivilRegistrationSystem");
         Thread thread3 = new Thread(documentRegistrationSystem, "Management Day DocumentRegistrationSystem");

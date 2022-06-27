@@ -6,7 +6,10 @@ public class BankChecks {
 
     static public boolean insertBankCheck(String checkNumber, String accountNumberSender, String accountNumberReceiver, double amount, LocalDate dateRegister, boolean passed){
 
-        String sqlCMD = String.format("INSERT INTO bankchecks (checkNumber, accountNumberSender, accountNumberReceiver, amount, dateRegister, passed) VALUES ('%s', '%s', '%s', %f, '"+dateRegister+"', '"+passed+"')",checkNumber, accountNumberSender, accountNumberReceiver, amount);
+        int bool=0;
+        if(passed) bool=1;
+
+        String sqlCMD = String.format("INSERT INTO bankchecks (checkNumber, accountNumberSender, accountNumberReceiver, amount, dateRegister, passed) VALUES ('%s', '%s', '%s', %f, '"+dateRegister+"', '"+bool+"')",checkNumber, accountNumberSender, accountNumberReceiver, amount);
         return MySQL.executeSQL(sqlCMD);
 
     }

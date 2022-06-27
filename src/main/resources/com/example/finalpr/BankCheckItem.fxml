@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane fx:id="CheckItem" prefHeight="34.0" prefWidth="530.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="CheckNumber" layoutX="3.0" prefHeight="34.0" prefWidth="88.0" style="-fx-background-color: #CCCCFF;" text="CheckNumber" />
+      <Label fx:id="AccountNumber" layoutX="91.0" prefHeight="34.0" prefWidth="94.0" style="-fx-background-color: #CCCCFF;" text="AccountNumber" />
+      <Label fx:id="Amount" layoutX="185.0" prefHeight="34.0" prefWidth="94.0" style="-fx-background-color: #CCCCFF;" text="Amount" />
+      <Label fx:id="DateRegister" layoutX="279.0" prefHeight="34.0" prefWidth="136.0" style="-fx-background-color: #CCCCFF;" text="DateRegister" />
+      <Label fx:id="Passed" layoutX="415.0" prefHeight="34.0" prefWidth="57.0" style="-fx-background-color: #CCCCFF;" text="Passed" />
+      <JFXButton fx:id="Pass" layoutX="472.0" onMouseClicked="#Passe" prefHeight="34.0" prefWidth="58.0" style="-fx-background-color: #C9C0BB;" text="Pass" />
+   </children>
+</AnchorPane>
