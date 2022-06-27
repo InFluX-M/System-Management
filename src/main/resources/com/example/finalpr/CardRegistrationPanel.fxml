@@ -1,14 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.finalpr.CardRegistrationPanelCLR"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="277.0" prefWidth="600.0" style="-fx-background-color: #CFECEC;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.finalpr.CardRegistrationPanelCLR">
+   <children>
+      <JFXButton layoutY="212.0" onMouseClicked="#back" prefHeight="66.0" prefWidth="600.0" style="-fx-background-color: #686A6C;" text="Back" />
+      <Label fx:id="CardNumber" layoutX="91.0" layoutY="110.0" prefHeight="26.0" prefWidth="405.0" style="-fx-background-color: #307D7E;" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="Times New Roman" size="20.0" />
+         </font></Label>
+      <Label prefHeight="82.0" prefWidth="600.0" style="-fx-background-color: #C19A6B;" text="                                       Register BankCard" textFill="#474636">
+         <font>
+            <Font name="Segoe UI Black" size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="CVV2" layoutX="118.0" layoutY="157.0" prefHeight="26.0" prefWidth="164.0" style="-fx-background-color: #307D7E;" textFill="WHITE">
+         <font>
+            <Font name="Times New Roman" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="ExpirationDate" layoutX="312.0" layoutY="157.0" prefHeight="26.0" prefWidth="164.0" style="-fx-background-color: #307D7E;" textFill="WHITE">
+         <font>
+            <Font name="Times New Roman" size="16.0" />
+         </font>
+      </Label>
+   </children>
 </AnchorPane>

@@ -1,5 +1,9 @@
 package com.example.finalpr;
 
+import com.example.finalpr.Availabilities.GoodLoanAccount;
+import com.example.finalpr.Availabilities.SavingAccount;
+import com.example.finalpr.Systems.Systems;
+import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -14,6 +18,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import static com.example.finalpr.HelloApplication.bankSystem;
 
 public class BankAccountPanelCLR implements Initializable {
 
@@ -37,8 +43,27 @@ public class BankAccountPanelCLR implements Initializable {
     private ImageView imgW;
 
     @FXML
-    void CardRegistration(MouseEvent event) {
+    private JFXButton CR;
 
+    @FXML
+    private JFXButton GC;
+
+    @FXML
+    private JFXButton PC;
+
+
+    @FXML
+    void CardRegistration(MouseEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("CardRegistrationPanel.fxml"));
+            Stage s1 = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            s1.setScene(scene);
+            s1.show();
+        }
+        catch (IOException e) {
+
+        }
     }
 
     @FXML
@@ -95,12 +120,21 @@ public class BankAccountPanelCLR implements Initializable {
 
     @FXML
     void back(MouseEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("LoginPage.fxml"));
+            Stage s1 = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            s1.setScene(scene);
+            s1.show();
+        }
+        catch (IOException e) {
 
+        }
     }
 
     @FXML
     void exit(MouseEvent event) {
-
+        System.exit(1);
     }
 
     @Override
@@ -119,5 +153,14 @@ public class BankAccountPanelCLR implements Initializable {
         imgG.setImage(img6);
         imgP.setImage(img5);
 
+        if(bankSystem.getNowBankAccount() instanceof GoodLoanAccount){
+            GC.setDisable(true);
+            PC.setDisable(true);
+        }
+        else if(bankSystem.getNowBankAccount() instanceof SavingAccount){
+            CR.setDisable(true);
+            GC.setDisable(true);
+            PC.setDisable(true);
+        }
     }
 }

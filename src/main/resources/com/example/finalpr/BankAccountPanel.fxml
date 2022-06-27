@@ -6,7 +6,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="452.0" prefWidth="600.0" style="-fx-background-color: #F8F6F0;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.finalpr.BankAccountPanelCLR">
     <children>
         <JFXButton layoutX="12.0" layoutY="121.0" onMouseClicked="#Deposit" prefHeight="106.0" prefWidth="182.0" style="-fx-background-color: #e5a800;" text="      Deposit">
@@ -38,17 +37,17 @@
         <ImageView fx:id="imgD" fitHeight="39.0" fitWidth="52.0" layoutX="42.0" layoutY="155.0" pickOnBounds="true" preserveRatio="true" />
         <ImageView fx:id="imgW" fitHeight="39.0" fitWidth="52.0" layoutX="239.0" layoutY="155.0" pickOnBounds="true" preserveRatio="true" />
         <ImageView fx:id="imgT" fitHeight="39.0" fitWidth="52.0" layoutX="432.0" layoutY="155.0" pickOnBounds="true" preserveRatio="true" />
-        <JFXButton layoutX="14.0" layoutY="247.0" onMouseClicked="#CardRegistration" prefHeight="106.0" prefWidth="182.0" style="-fx-background-color: #34495E;" text="           Card Registration">
+        <JFXButton fx:id="CR" layoutX="14.0" layoutY="247.0" onMouseClicked="#CardRegistration" prefHeight="106.0" prefWidth="182.0" style="-fx-background-color: #34495E;" text="           Card Registration">
             <font>
                 <Font name="Segoe UI Light" size="14.0" />
             </font>
         </JFXButton>
-        <JFXButton layoutX="209.0" layoutY="247.0" onMouseClicked="#PassCheck" prefHeight="106.0" prefWidth="182.0" style="-fx-background-color: #935116;" text="       Pass Check">
+        <JFXButton fx:id="PC" layoutX="209.0" layoutY="247.0" onMouseClicked="#PassCheck" prefHeight="106.0" prefWidth="182.0" style="-fx-background-color: #935116;" text="       Pass Check">
             <font>
                 <Font name="Segoe UI Light" size="14.0" />
             </font>
         </JFXButton>
-        <JFXButton layoutX="404.0" layoutY="247.0" onMouseClicked="#GetCheck" prefHeight="106.0" prefWidth="182.0" style="-fx-background-color: #E9967A;" text="         Get Check">
+        <JFXButton fx:id="GC" layoutX="404.0" layoutY="247.0" onMouseClicked="#GetCheck" prefHeight="106.0" prefWidth="182.0" style="-fx-background-color: #E9967A;" text="         Get Check">
             <font>
                 <Font name="Segoe UI Light" size="14.0" />
             </font>

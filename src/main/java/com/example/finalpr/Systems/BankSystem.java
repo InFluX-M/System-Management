@@ -1,6 +1,7 @@
 package com.example.finalpr.Systems;
 
 import com.example.finalpr.Availabilities.*;
+import com.example.finalpr.MYSQL.BankCards;
 import com.example.finalpr.MYSQL.CurrentBankAccounts;
 import com.example.finalpr.MYSQL.GoodLoanBankAccounts;
 import com.example.finalpr.MYSQL.SavingBankAccounts;
@@ -38,6 +39,27 @@ public class BankSystem implements Runnable{
             if(accountNumber.equals(bankAccount.getAccountNumber())) return bankAccount;
         }
         return null;
+    }
+
+    public String getBankCardInformation(){
+        int cardNumber = 0;
+        int CVV2 = 0;
+
+        for(CurrentAccount currentAccount : currentBankAccounts){
+            if(currentAccount.getBankCard() != null){
+                cardNumber++;
+                CVV2++;
+            }
+        }
+        for(GoodLoanAccount goodLoanAccount : goodLoanAccounts){
+            if(goodLoanAccount.getBankCard() != null){
+                cardNumber++;
+                CVV2++;
+            }
+        }
+
+        return (6000000000000000L+cardNumber)+","+(500+CVV2);
+
     }
 
     public boolean loadBankAccount() throws SQLException, IOException, ClassNotFoundException {
@@ -142,6 +164,20 @@ public class BankSystem implements Runnable{
     public boolean addGoodLoanAccount(GoodLoanAccount goodLoanAccount){
         GoodLoanBankAccounts.insertGoodLoanBankAccounts(goodLoanAccount.getAccountNumber(), goodLoanAccount.getOwnerID(), goodLoanAccount.getBalance(), goodLoanAccount.getDateCreate(), goodLoanAccount.getPoint());
         return goodLoanAccounts.add(goodLoanAccount);
+    }
+
+    public boolean addBankCard(BankCard bankCard){
+
+        if(nowBankAccount instanceof CurrentAccount currentAccount){
+            currentAccount.setBankCard(bankCard);
+        }
+        else if(nowBankAccount instanceof GoodLoanAccount goodLoanAccount){
+            goodLoanAccount.setBankCard(bankCard);
+        }
+
+        return BankCards.insertBankCard(bankCard.getCardNumber(), bankCard.getExpirationDate(), bankCard.getCVV2(),
+                nowBankAccount.getOwnerID(), nowBankAccount.getAccountNumber());
+
     }
 
     public boolean changeDay() throws IOException {
