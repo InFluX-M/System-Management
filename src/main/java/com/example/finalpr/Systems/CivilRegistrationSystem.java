@@ -49,6 +49,11 @@ public class CivilRegistrationSystem implements Runnable{
         return people.add(person);
     }
 
+    public boolean deletePerson(String ID){
+        people.remove(searchPerson(ID));
+        return People.deletePerson(ID);
+    }
+
     public boolean editPerson(String ID, String name, int age, String sex){
         People.updatePerson(ID, name, age, sex);
         searchPerson(ID).setName(name);
