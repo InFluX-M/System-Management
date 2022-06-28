@@ -20,11 +20,6 @@
             <Font name="Segoe UI Black" size="20.0" />
          </font>
       </Label>
-      <Label fx:id="ID" layoutX="90.0" layoutY="104.0" prefHeight="26.0" prefWidth="198.0">
-         <font>
-            <Font name="Times New Roman" size="17.0" />
-         </font>
-      </Label>
       <JFXTextArea fx:id="Address" layoutX="72.0" layoutY="157.0" prefHeight="66.0" prefWidth="248.0" promptText="Address:" style="-fx-background-color: #307D7E;" />
       <Label fx:id="DocumentRegistrationCode" layoutX="82.0" layoutY="104.0" prefHeight="26.0" prefWidth="198.0">
          <font>

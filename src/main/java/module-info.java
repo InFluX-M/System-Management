@@ -13,7 +13,11 @@ module com.example.finalpr {
     requires java.sql;
     requires mysql.connector.java;
     requires com.jfoenix;
+    requires javafx.media;
+    requires com.fasterxml.jackson.core;
+    requires com.fasterxml.jackson.databind;
 
     opens com.example.finalpr to javafx.fxml;
     exports com.example.finalpr;
+    exports com.example.finalpr.Availabilities;
 }

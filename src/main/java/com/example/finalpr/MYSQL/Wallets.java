@@ -1,7 +1,5 @@
 package com.example.finalpr.MYSQL;
 
-import java.time.LocalDate;
-
 public class Wallets {
 
     static public boolean insertWallet(String ownerID){

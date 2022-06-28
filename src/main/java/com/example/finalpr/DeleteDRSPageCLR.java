@@ -11,6 +11,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import static com.example.finalpr.HelloApplication.documentRegistrationSystem;
 
@@ -23,22 +24,24 @@ public class DeleteDRSPageCLR {
     private Label statue;
 
     @FXML
-    void Delete(MouseEvent event) {
-        documentRegistrationSystem.deleteEstate(DocumentRegistrationCode.getText());
-        statue.setText("Estate Deleted Successfully... :)");
+    void Delete() {
+
+        if(documentRegistrationSystem.deleteEstate(DocumentRegistrationCode.getText())){
+            statue.setText("Estate Deleted Successfully... :)");
+        }
     }
 
     @FXML
     void back(MouseEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("DocumentRegistrationSystemPage.fxml"));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("DocumentRegistrationSystemPage.fxml")));
             Stage s1 = (Stage) ((Node)event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             s1.setScene(scene);
             s1.show();
         }
         catch (IOException e) {
-
+            e.printStackTrace();
         }
     }
 }

@@ -1,12 +1,6 @@
 package com.example.finalpr.MYSQL;
 
-import com.example.finalpr.Availabilities.Estate;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.time.LocalDate;
-
-import static com.example.finalpr.HelloApplication.documentRegistrationSystem;
 
 public class BankCards {
 

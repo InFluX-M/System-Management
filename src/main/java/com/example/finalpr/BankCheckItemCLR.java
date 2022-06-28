@@ -7,10 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-
-import static com.example.finalpr.HelloApplication.bankSystem;
 
 public class BankCheckItemCLR {
 
@@ -36,7 +33,7 @@ public class BankCheckItemCLR {
     private Label Passed;
 
     @FXML
-    void Passe(MouseEvent event) {
+    void Passe() {
         bankCheck.setPassed(true);
     }
 
@@ -50,7 +47,7 @@ public class BankCheckItemCLR {
             CheckItem = loader.load();
         }
         catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
     public void setCheck(BankCheck bankCheck) {

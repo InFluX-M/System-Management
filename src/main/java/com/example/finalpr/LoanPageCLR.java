@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 import static com.example.finalpr.HelloApplication.bankSystem;
@@ -38,29 +39,29 @@ public class LoanPageCLR implements Initializable {
     @FXML
     void back(MouseEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("BankAccountPanel.fxml"));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("BankAccountPanel.fxml")));
             Stage s1 = (Stage) ((Node)event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             s1.setScene(scene);
             s1.show();
         }
         catch (IOException e) {
-
+            e.printStackTrace();
         }
     }
 
     @FXML
-    void register(MouseEvent event) {
+    void register() {
 
         String loanNumber = bankSystem.getLoanNumber();
         double amount = Double.parseDouble(Amount.getText());
         int numberOfInstallments = InstallmentsPaid.getValue();
-        int numberOfInstallmentsPaid = 0;
         boolean active = true;
 
         Loan loan = new Loan(loanNumber, amount, numberOfInstallments, active);
-        systems.addLoan(loan);
-        labelRegister.setText("Loan Registered Successfully... :)");
+        if(systems.addLoan(loan)){
+            labelRegister.setText("Loan Registered Successfully... :)");
+        }
     }
 
     @Override

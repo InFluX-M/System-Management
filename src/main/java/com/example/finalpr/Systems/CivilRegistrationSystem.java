@@ -1,13 +1,8 @@
 package com.example.finalpr.Systems;
 
-import com.example.finalpr.Availabilities.BankCard;
 import com.example.finalpr.Availabilities.Person;
-import com.example.finalpr.Availabilities.Wallet;
-import com.example.finalpr.MYSQL.MySQL;
 import com.example.finalpr.MYSQL.People;
 
-import java.io.*;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -32,15 +27,7 @@ public class CivilRegistrationSystem {
         return singletonCivilRegistrationSystem;
     }
 
-    public boolean LoadPeople() throws SQLException, IOException, ClassNotFoundException {
-
-//        File file = new File("DateCRS.txt");
-//        FileInputStream fileInputStream = new FileInputStream(file);
-//        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-//        localDate = (LocalDate) objectInputStream.readObject();
-//        objectInputStream.close();
-//        fileInputStream.close();
-
+    public boolean LoadPeople() throws SQLException{
         return People.LoadPeople();
     }
 
@@ -50,11 +37,13 @@ public class CivilRegistrationSystem {
     }
 
     public boolean deletePerson(String ID){
+
         people.remove(searchPerson(ID));
         return People.deletePerson(ID);
     }
 
     public boolean editPerson(String ID, String name, int age, String sex){
+
         People.updatePerson(ID, name, age, sex);
         searchPerson(ID).setName(name);
         searchPerson(ID).setAge(age);
@@ -63,6 +52,7 @@ public class CivilRegistrationSystem {
     }
 
     public Person searchPerson(String ID){
+
         for(Person person : people){
             if(ID.equals(person.getID())) return person;
         }

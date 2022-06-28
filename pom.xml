@@ -90,6 +90,36 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.github.lbovolini</groupId>
+            <artifactId>ObjectMapper</artifactId>
+            <version>0.2.3</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.konghq</groupId>
+            <artifactId>unirest-objectmapper-jackson</artifactId>
+            <version>3.13.10</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.xellitix.commons</groupId>
+            <artifactId>jackson-utils</artifactId>
+            <version>0.2.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.github.javiercanillas</groupId>
+            <artifactId>jackson-masker</artifactId>
+            <version>0.9.9</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.lbovolini</groupId>
+            <artifactId>object-mapper</artifactId>
+            <version>1.1.68</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
     <build>

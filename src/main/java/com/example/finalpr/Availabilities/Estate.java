@@ -1,8 +1,9 @@
 package com.example.finalpr.Availabilities;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Estate {
+public class Estate implements Serializable {
 
     private String documentRegistrationCode;
     private String ownerID;

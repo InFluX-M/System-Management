@@ -3,14 +3,12 @@ package com.example.finalpr.MYSQL;
 import com.example.finalpr.Availabilities.BankCard;
 import com.example.finalpr.Availabilities.Person;
 
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 import com.example.finalpr.Availabilities.Wallet;
-import com.example.finalpr.Systems.CivilRegistrationSystem;
 
 import static com.example.finalpr.HelloApplication.civilRegistrationSystem;
 
@@ -31,6 +29,7 @@ public class People {
         String sqlCMD = "SELECT people.ID, people.name, people.sex, people.age FROM people";
         ResultSet resultSet = MySQL.executeQuery(sqlCMD);
 
+        assert resultSet!=null;
         while(resultSet.next()){
 
             String ID = resultSet.getString("people.ID");
@@ -40,6 +39,7 @@ public class People {
 
             String sqlCMD3 = String.format("SELECT wallets.money FROM wallets WHERE ownerID = '%s'",ID);
             ResultSet resultSet3 = MySQL.executeQuery(sqlCMD3);
+            assert resultSet3!=null;
             resultSet3.next();
             double money = resultSet3.getDouble("wallets.money");
 
@@ -47,6 +47,8 @@ public class People {
             ArrayList<BankCard> bankCards = new ArrayList<>();
             String sqlCMD2 = String.format("SELECT bankcards.cardNumber, bankcards.CVV2, bankcards.expirationDate FROM bankcards WHERE ownerID = '%s'",ID);
             ResultSet resultSet2 = MySQL.executeQuery(sqlCMD2);
+
+            assert resultSet2!=null;
             while(resultSet2.next()){
 
                 String cardNumber = resultSet2.getString("bankcards.cardNumber");

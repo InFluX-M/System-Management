@@ -2,7 +2,6 @@ package com.example.finalpr;
 
 import com.example.finalpr.Availabilities.GoodLoanAccount;
 import com.example.finalpr.Availabilities.SavingAccount;
-import com.example.finalpr.Systems.Systems;
 import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,12 +16,12 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 import static com.example.finalpr.HelloApplication.bankSystem;
 
 public class BankAccountPanelCLR implements Initializable {
-
 
     @FXML
     private ImageView imgC;
@@ -61,13 +60,13 @@ public class BankAccountPanelCLR implements Initializable {
     @FXML
     void CardRegistration(MouseEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("CardRegistrationPanel.fxml"));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("CardRegistrationPanel.fxml")));
             Stage s1 = (Stage) ((Node)event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             s1.setScene(scene);
             s1.show();
         }
-        catch (IOException e) {
+        catch (IOException ignored) {
 
         }
     }
@@ -75,13 +74,13 @@ public class BankAccountPanelCLR implements Initializable {
     @FXML
     void Deposit(MouseEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("DepositPanel.fxml"));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("DepositPanel.fxml")));
             Stage s1 = (Stage) ((Node)event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             s1.setScene(scene);
             s1.show();
         }
-        catch (IOException e) {
+        catch (IOException ignored) {
 
         }
     }
@@ -89,103 +88,103 @@ public class BankAccountPanelCLR implements Initializable {
     @FXML
     void GetCheck(MouseEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("PassCheckPanel.fxml"));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("PassCheckPanel.fxml")));
             Stage s1 = (Stage) ((Node)event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             s1.setScene(scene);
             s1.show();
         }
         catch (IOException e) {
-
+            e.printStackTrace();
         }
     }
 
     @FXML
     void GiveCheck(MouseEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("GiveCheckPanel.fxml"));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("GiveCheckPanel.fxml")));
             Stage s1 = (Stage) ((Node)event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             s1.setScene(scene);
             s1.show();
         }
         catch (IOException e) {
-
+            e.printStackTrace();
         }
     }
 
     @FXML
     void Transfer(MouseEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("TransferPanel.fxml"));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("TransferPanel.fxml")));
             Stage s1 = (Stage) ((Node)event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             s1.setScene(scene);
             s1.show();
         }
         catch (IOException e) {
-
+            e.printStackTrace();
         }
     }
 
     @FXML
     void Withdrawal(MouseEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("WithdrawalPanel.fxml"));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("WithdrawalPanel.fxml")));
             Stage s1 = (Stage) ((Node)event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             s1.setScene(scene);
             s1.show();
         }
         catch (IOException e) {
-
+            e.printStackTrace();
         }
     }
 
     @FXML
     void Loans(MouseEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("LoanPage.fxml"));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("LoanPage.fxml")));
             Stage s1 = (Stage) ((Node)event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             s1.setScene(scene);
             s1.show();
         }
         catch (IOException e) {
-
+            e.printStackTrace();
         }
     }
 
     @FXML
     void Statues(MouseEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("StatusPage.fxml"));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("StatusPage.fxml")));
             Stage s1 = (Stage) ((Node)event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             s1.setScene(scene);
             s1.show();
         }
         catch (IOException e) {
-
+            e.printStackTrace();
         }
     }
 
     @FXML
     void back(MouseEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("LoginPage.fxml"));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("LoginPage.fxml")));
             Stage s1 = (Stage) ((Node)event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             s1.setScene(scene);
             s1.show();
         }
         catch (IOException e) {
-
+            e.printStackTrace();
         }
     }
 
     @FXML
-    void exit(MouseEvent event) {
+    void exit() {
         System.exit(1);
     }
 
@@ -200,7 +199,6 @@ public class BankAccountPanelCLR implements Initializable {
         Image img6 = new Image("C:\\Users\\Laptopkaran\\Desktop\\Photoo\\Check.png");
         Image img7 = new Image("C:\\Users\\Laptopkaran\\Desktop\\Photoo\\loan.png");
         Image img8 = new Image("C:\\Users\\Laptopkaran\\Desktop\\Photoo\\check-list.png");
-
 
         imgD.setImage(img1);
         imgW.setImage(img2);

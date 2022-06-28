@@ -1,6 +1,5 @@
 package com.example.finalpr;
 
-import com.example.finalpr.Systems.BankSystem;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -11,16 +10,19 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 import static com.example.finalpr.HelloApplication.*;
 
 public class MainPanelAdminCLR implements Initializable {
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -38,6 +40,7 @@ public class MainPanelAdminCLR implements Initializable {
         label2.setText("Number of Estate Registered: "+documentRegistrationSystem.getEstates().size()+"");
         label1.setText("Number of Person Registered: "+civilRegistrationSystem.getPeople().size()+"");
         date.setText(LocalDate.now().toString());
+        date.setTextAlignment(TextAlignment.CENTER);
     }
 
     @FXML
@@ -66,57 +69,65 @@ public class MainPanelAdminCLR implements Initializable {
 
     @FXML
     void BankSystem(MouseEvent event) {
+
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("BankSystemPage.fxml"));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("BankSystemPage.fxml")));
             Stage s1 = (Stage) ((Node)event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             s1.setScene(scene);
             s1.show();
         }
         catch (IOException e) {
-
+            e.printStackTrace();
         }
+
     }
 
     @FXML
     void CivilRegistrationSystem(MouseEvent event) {
+
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("CivilRegistrationSystemPage.fxml"));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("CivilRegistrationSystemPage.fxml")));
             Stage s1 = (Stage) ((Node)event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             s1.setScene(scene);
             s1.show();
         }
         catch (IOException e) {
-
+            e.printStackTrace();
         }
+
     }
 
     @FXML
     void DocumentRegistrationSystem(MouseEvent event) {
+
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("DocumentRegistrationSystemPage.fxml"));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("DocumentRegistrationSystemPage.fxml")));
             Stage s1 = (Stage) ((Node)event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             s1.setScene(scene);
             s1.show();
         }
         catch (IOException e) {
-
+            e.printStackTrace();
         }
+
     }
 
     @FXML
     void LogOut(MouseEvent event) {
+
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("LoginPage.fxml"));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("LoginPage.fxml")));
             Stage s1 = (Stage) ((Node)event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             s1.setScene(scene);
             s1.show();
         }
         catch (IOException e) {
-
+            e.printStackTrace();
         }
+
     }
 }

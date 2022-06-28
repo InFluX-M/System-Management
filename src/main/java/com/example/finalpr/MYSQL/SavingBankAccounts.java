@@ -28,6 +28,7 @@ public class SavingBankAccounts {
         String sqlCMD = "SELECT accountNumber, ownerID, balance, dateCreate, point, kindBankInterestPercentage FROM savingbankaccount";
         ResultSet resultSet = MySQL.executeQuery(sqlCMD);
 
+        assert resultSet!=null;
         while(resultSet.next()){
 
             String accountNumber = resultSet.getString("accountNumber");
@@ -44,6 +45,8 @@ public class SavingBankAccounts {
             ArrayList<Loan> loans = new ArrayList<>();
             String sqlCMD2 = String.format("SELECT loanNumber, amount, numberOfInstallments, numberOfInstallmentsPaid, active FROM loans WHERE accountNumber = '%s'", accountNumber);
             ResultSet resultSet2 = MySQL.executeQuery(sqlCMD2);
+
+            assert resultSet2!=null;
             while(resultSet2.next()){
 
                 String loanNumber = resultSet2.getString("loanNumber");
@@ -60,7 +63,7 @@ public class SavingBankAccounts {
             SavingAccount savingAccount = new SavingAccount(accountNumber, ownerID, balance, dateCreate, point, kindBankInterestPercentage);
             savingAccount.setLoans(loans);
 
-            bankSystem.getSavingAccounts().add(savingAccount);
+            return bankSystem.getSavingAccounts().add(savingAccount);
         }
 
         return true;
@@ -69,8 +72,7 @@ public class SavingBankAccounts {
     static public boolean updateSavingBankAccounts(String accountNumber, String ownerID, double balance, LocalDate dateCreate, int point, double bankInterestPercentage, BankInterestPercentage kindBankInterestPercentage, int designatedTime){
 
         int kind = 0;
-        if(kindBankInterestPercentage == BankInterestPercentage.SHORT_TERM) kind = 0;
-        else if(kindBankInterestPercentage == BankInterestPercentage.LONG_TERM) kind = 1;
+        if(kindBankInterestPercentage == BankInterestPercentage.LONG_TERM) kind = 1;
         else if(kindBankInterestPercentage == BankInterestPercentage.SPECIAL) kind = 2;
 
         String sqlCMD = String.format("UPDATE savingbankaccount SET ownerID='%s', balance=%f, point=%d, dateCreate='"+dateCreate+"', bankInterestPercentage=%f, kindBankInterestPercentage=%d, designatedTime=%d WHERE accountNumber='%s'", ownerID, balance, point, bankInterestPercentage, kind, designatedTime, accountNumber);

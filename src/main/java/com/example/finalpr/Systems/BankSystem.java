@@ -1,13 +1,10 @@
 package com.example.finalpr.Systems;
 
 import com.example.finalpr.Availabilities.*;
-import com.example.finalpr.HelloApplication;
 import com.example.finalpr.MYSQL.*;
 
-import java.io.*;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.Month;
 import java.util.ArrayList;
 
 public class BankSystem{
@@ -82,18 +79,11 @@ public class BankSystem{
 
     }
 
-    public boolean loadBankAccount() throws SQLException, IOException, ClassNotFoundException {
+    public boolean loadBankAccount() throws SQLException {
 
         Boolean valid1 = CurrentBankAccounts.loadCurrentBankAccounts();
         Boolean valid2 = SavingBankAccounts.loadSavingBankAccounts();
         Boolean valid3 = GoodLoanBankAccounts.loadGoodLoanBankAccounts();
-
-//        File file = new File("DateBS.txt");
-//        FileInputStream fileInputStream = new FileInputStream(file);
-//        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-//        localDate = (LocalDate) objectInputStream.readObject();
-//        objectInputStream.close();
-//        fileInputStream.close();
 
         return valid1 && valid2 && valid3;
     }
@@ -107,44 +97,20 @@ public class BankSystem{
         return singletonBankSystem;
     }
 
-    public static BankSystem getSingletonBankSystem() {
-        return singletonBankSystem;
-    }
-
-    public static void setSingletonBankSystem(BankSystem singletonBankSystem) {
-        BankSystem.singletonBankSystem = singletonBankSystem;
-    }
-
     public BankAccount getNowBankAccount() {
         return nowBankAccount;
-    }
-
-    public void setNowBankAccount(BankAccount nowBankAccount) {
-        this.nowBankAccount = nowBankAccount;
     }
 
     public ArrayList<CurrentAccount> getCurrentBankAccounts() {
         return currentBankAccounts;
     }
 
-    public void setCurrentBankAccounts(ArrayList<CurrentAccount> currentBankAccounts) {
-        this.currentBankAccounts = currentBankAccounts;
-    }
-
     public ArrayList<SavingAccount> getSavingAccounts() {
         return savingAccounts;
     }
 
-    public void setSavingAccounts(ArrayList<SavingAccount> savingAccounts) {
-        this.savingAccounts = savingAccounts;
-    }
-
     public ArrayList<GoodLoanAccount> getGoodLoanAccounts() {
         return goodLoanAccounts;
-    }
-
-    public void setGoodLoanAccounts(ArrayList<GoodLoanAccount> goodLoanAccounts) {
-        this.goodLoanAccounts = goodLoanAccounts;
     }
 
     public boolean loginBankAccount(String accountNumber, String ownerID){
@@ -177,6 +143,7 @@ public class BankSystem{
         CurrentBankAccounts.insertCurrentBankAccounts(currentAccount.getAccountNumber(), currentAccount.getOwnerID(), currentAccount.getBalance(), currentAccount.getDateCreate(), currentAccount.getPoint());
         return currentBankAccounts.add(currentAccount);
     }
+
     public boolean addSavingAccount(SavingAccount savingAccount){
         SavingBankAccounts.insertSavingBankAccounts(savingAccount.getAccountNumber(), savingAccount.getOwnerID(), savingAccount.getBalance(), savingAccount.getDateCreate(), savingAccount.getPoint(), savingAccount.getBankInterestPercentage(), savingAccount.getKindBankInterestPercentage(), savingAccount.getDesignatedTime());
         return savingAccounts.add(savingAccount);

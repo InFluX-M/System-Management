@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Objects;
 
 import static com.example.finalpr.HelloApplication.documentRegistrationSystem;
 
@@ -34,28 +35,31 @@ public class EditDRSPageCLR {
     private Label status;
 
     @FXML
-    void Edit(MouseEvent event) {
+    void Edit() {
+
         String documentRegistrationCode = DocumentRegistrationCode.getText();
         String ownerID = OwnerID.getText();
         String address = Address.getText();
         LocalDate date = LocalDate.now();
         double cost = Double.parseDouble(Cost.getText());
 
-        documentRegistrationSystem.editEstate(documentRegistrationCode, ownerID, address, date, cost);
-        status.setText("Estate Edited Successfully... :)");
+        if(documentRegistrationSystem.editEstate(documentRegistrationCode, ownerID, address, date, cost)) {
+            status.setText("Estate Edited Successfully... :)");
+        }
     }
 
     @FXML
     void back(MouseEvent event) {
+
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("DocumentRegistrationSystemPage.fxml"));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("DocumentRegistrationSystemPage.fxml")));
             Stage s1 = (Stage) ((Node)event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             s1.setScene(scene);
             s1.show();
         }
         catch (IOException e) {
-
+            e.printStackTrace();
         }
     }
 

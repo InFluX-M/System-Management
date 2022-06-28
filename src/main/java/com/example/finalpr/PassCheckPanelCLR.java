@@ -2,7 +2,6 @@ package com.example.finalpr;
 
 import com.example.finalpr.Availabilities.BankCheck;
 import com.example.finalpr.Availabilities.CurrentAccount;
-import com.example.finalpr.Systems.Systems;
 import com.jfoenix.controls.JFXListView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,6 +16,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 import static com.example.finalpr.HelloApplication.bankSystem;
@@ -29,19 +29,19 @@ public class PassCheckPanelCLR implements Initializable {
     @FXML
     void back(MouseEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("BankAccountPanel.fxml"));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("BankAccountPanel.fxml")));
             Stage s1 = (Stage) ((Node)event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             s1.setScene(scene);
             s1.show();
         }
         catch (IOException e) {
-
+            e.printStackTrace();
         }
     }
 
     @FXML
-    void exit(MouseEvent event) {
+    void exit() {
         System.exit(1);
     }
 

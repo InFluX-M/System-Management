@@ -1,8 +1,6 @@
 package com.example.finalpr;
 
-import com.example.finalpr.Availabilities.CurrentAccount;
 import com.example.finalpr.Availabilities.SavingAccount;
-import com.example.finalpr.Systems.BankSystem;
 import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,14 +14,13 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 import static com.example.finalpr.HelloApplication.bankSystem;
 import static com.example.finalpr.HelloApplication.systems;
 
 public class StatusPageCLR implements Initializable {
-
 
     @FXML
     private JFXButton GetSavingMoney;
@@ -34,21 +31,23 @@ public class StatusPageCLR implements Initializable {
     @FXML
     void Back(MouseEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("BankAccountPanel.fxml"));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("BankAccountPanel.fxml")));
             Stage s1 = (Stage) ((Node)event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             s1.setScene(scene);
             s1.show();
         }
         catch (IOException e) {
-
+            e.printStackTrace();
         }
     }
 
     @FXML
-    void SavingMoney(MouseEvent event) {
+    void SavingMoney() {
 
-        systems.getSavingMoney();
+        if(systems.getSavingMoney()){
+            status.setText("Get Saving Money... :)");
+        }
 
     }
 

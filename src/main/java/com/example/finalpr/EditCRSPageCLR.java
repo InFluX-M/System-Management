@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 import static com.example.finalpr.HelloApplication.civilRegistrationSystem;
@@ -37,20 +38,21 @@ public class EditCRSPageCLR implements Initializable {
     private Label statue;
 
     @FXML
-    void Edit(MouseEvent event) {
+    void Edit() {
         String mID = ID.getText();
         String name = Name.getText();
         int age = Integer.parseInt(Age.getText());
         String sex = Sex.getValue();
 
-        civilRegistrationSystem.editPerson(mID, name, age, sex);
-        statue.setText("Person Edited Successfully... :)");
+        if(civilRegistrationSystem.editPerson(mID, name, age, sex)){
+            statue.setText("Person Edited Successfully... :)");
+        }
     }
 
     @FXML
     void back(MouseEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("CivilRegistrationSystemPage.fxml"));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("CivilRegistrationSystemPage.fxml")));
             Stage s1 = (Stage) ((Node)event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             s1.setScene(scene);

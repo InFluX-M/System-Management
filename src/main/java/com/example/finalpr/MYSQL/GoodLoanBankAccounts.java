@@ -1,7 +1,6 @@
 package com.example.finalpr.MYSQL;
 
 import com.example.finalpr.Availabilities.BankCard;
-import com.example.finalpr.Availabilities.CurrentAccount;
 import com.example.finalpr.Availabilities.GoodLoanAccount;
 import com.example.finalpr.Availabilities.Loan;
 
@@ -26,6 +25,7 @@ public class GoodLoanBankAccounts {
         String sqlCMD = "SELECT accountNumber, ownerID, point, balance, dateCreate FROM goodloanbankaccount";
         ResultSet resultSet = MySQL.executeQuery(sqlCMD);
 
+        assert resultSet!=null;
         while(resultSet.next()){
 
             String accountNumber = resultSet.getString("accountNumber");
@@ -38,6 +38,7 @@ public class GoodLoanBankAccounts {
             String sqlCMD1 = String.format("SELECT cardNumber, CVV2, expirationDate, ownerID FROM bankcards WHERE accountNumber = '%s'", accountNumber);
             ResultSet resultSet1 = MySQL.executeQuery(sqlCMD1);
 
+            assert resultSet1!=null;
             if(resultSet1.next()){
                 String cardNumber = resultSet1.getString("cardNumber");
                 LocalDate expirationDate = resultSet1.getDate("expirationDate").toLocalDate();
@@ -46,11 +47,11 @@ public class GoodLoanBankAccounts {
             }
             else bankCard = null;
 
-
             ArrayList<Loan> loans = new ArrayList<>();
             String sqlCMD2 = String.format("SELECT loanNumber, amount, numberOfInstallments, numberOfInstallmentsPaid, active FROM loans WHERE accountNumber = '%s'", accountNumber);
             ResultSet resultSet2 = MySQL.executeQuery(sqlCMD2);
 
+            assert resultSet2!=null;
             while(resultSet2.next()){
 
                 String loanNumber = resultSet2.getString("loanNumber");
@@ -79,7 +80,7 @@ public class GoodLoanBankAccounts {
         return MySQL.executeSQL(sqlCMD);
     }
 
-    static public boolean deleteGoodLoanBankAccount(String accountNumber) throws SQLException {
+    static public boolean deleteGoodLoanBankAccount(String accountNumber){
 
         String sqlCMD1 = String.format("DELETE FROM loans WHERE accountNumber = '%s'", accountNumber);
         boolean valid = MySQL.executeSQL(sqlCMD1);

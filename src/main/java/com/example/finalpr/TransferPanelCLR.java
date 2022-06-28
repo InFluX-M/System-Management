@@ -11,6 +11,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import static com.example.finalpr.HelloApplication.systems;
 
@@ -27,23 +28,28 @@ public class TransferPanelCLR {
 
     @FXML
     void Back(MouseEvent event) {
+
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("BankAccountPanel.fxml"));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("BankAccountPanel.fxml")));
             Stage s1 = (Stage) ((Node)event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             s1.setScene(scene);
             s1.show();
         }
         catch (IOException e) {
-
+            e.printStackTrace();
         }
+
     }
 
     @FXML
-    void Transfer(MouseEvent event) {
+    void Transfer() {
+
         double amount = Double.parseDouble(Amount.getText());
         String accNoR = AccountNumber.getText();
-        systems.transfer(amount, accNoR);
-        status.setText("Transfer Successfully... :)");
+
+        if(systems.transfer(amount, accNoR)){
+            status.setText("Transfer Successfully... :)");
+        }
     }
 }

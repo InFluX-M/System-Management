@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class DocumentRegistrationSystemPageCLR implements Initializable {
@@ -28,63 +29,71 @@ public class DocumentRegistrationSystemPageCLR implements Initializable {
 
     @FXML
     void back(MouseEvent event) {
+
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("MainPanelAdmin.fxml"));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MainPanelAdmin.fxml")));
             Stage s1 = (Stage) ((Node)event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             s1.setScene(scene);
             s1.show();
         }
         catch (IOException e) {
-
+            e.printStackTrace();
         }
+
     }
 
     @FXML
     void Register(MouseEvent event) {
+
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("RegisterDRSPage.fxml"));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("RegisterDRSPage.fxml")));
             Stage s1 = (Stage) ((Node)event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             s1.setScene(scene);
             s1.show();
         }
         catch (IOException e) {
-
+            e.printStackTrace();
         }
+
     }
 
     @FXML
     void Edit(MouseEvent event) {
+
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("EditDRSPage.fxml"));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("EditDRSPage.fxml")));
             Stage s1 = (Stage) ((Node)event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             s1.setScene(scene);
             s1.show();
         }
         catch (IOException e) {
-
+            e.printStackTrace();
         }
+
     }
 
     @FXML
     void Delete(MouseEvent event) {
+
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("DeleteDRSPage.fxml"));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("DeleteDRSPage.fxml")));
             Stage s1 = (Stage) ((Node)event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             s1.setScene(scene);
             s1.show();
         }
         catch (IOException e) {
-
+            e.printStackTrace();
         }
+
     }
 
 
     @FXML
-    void exit(MouseEvent event) {
+    void exit() {
         System.exit(1);
     }
 

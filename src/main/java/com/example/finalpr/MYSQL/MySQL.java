@@ -33,7 +33,6 @@ public class MySQL {
     static public ResultSet executeQuery(String sqlCMD){
 
         try {
-
             String URL = "jdbc:mysql://localhost/finalproject";
             String userName = "root";
             String password = "1382";

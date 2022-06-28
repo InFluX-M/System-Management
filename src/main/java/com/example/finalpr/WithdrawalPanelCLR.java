@@ -11,10 +11,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import static com.example.finalpr.HelloApplication.systems;
 
 public class WithdrawalPanelCLR {
+
     @FXML
     private TextField Amount;
 
@@ -23,23 +25,28 @@ public class WithdrawalPanelCLR {
 
     @FXML
     void Back(MouseEvent event) {
+
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("BankAccountPanel.fxml"));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("BankAccountPanel.fxml")));
             Stage s1 = (Stage) ((Node)event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             s1.setScene(scene);
             s1.show();
         }
         catch (IOException e) {
-
+            e.printStackTrace();
         }
+
     }
 
     @FXML
-    void Withdrawal(MouseEvent event) {
+    void Withdrawal() {
+
         double amount = Double.parseDouble(Amount.getText());
-        systems.withdrawal(amount);
-        status.setText("Withdrawal Successfully... :)");
+
+        if(systems.withdrawal(amount)){
+            status.setText("Withdrawal Successfully... :)");
+        }
     }
 
 }

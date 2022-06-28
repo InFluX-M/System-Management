@@ -1,9 +1,8 @@
 package com.example.finalpr;
 
 import com.example.finalpr.Availabilities.Person;
-import com.example.finalpr.Availabilities.Wallet;
-import com.example.finalpr.MYSQL.People;
-import com.jfoenix.controls.JFXButton;
+
+import com.example.finalpr.MYSQL.No;
 import com.jfoenix.controls.JFXComboBox;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,10 +13,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 import static com.example.finalpr.HelloApplication.civilRegistrationSystem;
@@ -40,32 +42,43 @@ public class RegisterCRSPageCLR implements Initializable {
 
     @FXML
     void back(MouseEvent event) {
+
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("CivilRegistrationSystemPage.fxml"));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("CivilRegistrationSystemPage.fxml")));
             Stage s1 = (Stage) ((Node)event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             s1.setScene(scene);
             s1.show();
         }
         catch (IOException e) {
-
+            e.printStackTrace();
         }
+
     }
 
     @FXML
-    void register(MouseEvent event) {
-        String ID = civilRegistrationSystem.getPeople().size()+"";
+    void register(){
+
+        String ID = No.ID;
         String name = Name.getText();
         int age = Integer.parseInt(Age.getText());
         String sex = Sex.getValue();
-        Person person = new Person(ID, name, age, sex);
-        civilRegistrationSystem.addPerson(person);
-        labelRegister.setText("Person Registered Successfully... :)");
+
+        if(civilRegistrationSystem.addPerson(new Person(ID, name, age, sex))){
+
+            labelRegister.setTextAlignment(TextAlignment.CENTER);
+            labelRegister.setText("Person Registered Successfully... :)");
+        }
+
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Sex.getItems().addAll("MAN","WOMAN");
-        ID.setText(civilRegistrationSystem.getPeople().size()+"");
+        try {
+            ID.setText("ID: "+ No.getID());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

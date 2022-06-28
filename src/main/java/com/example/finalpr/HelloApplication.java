@@ -1,10 +1,10 @@
 package com.example.finalpr;
 
-import com.example.finalpr.Availabilities.CurrentAccount;
 import com.example.finalpr.Systems.BankSystem;
 import com.example.finalpr.Systems.CivilRegistrationSystem;
 import com.example.finalpr.Systems.DocumentRegistrationSystem;
 import com.example.finalpr.Systems.Systems;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -12,8 +12,6 @@ import javafx.stage.Stage;
 
 import java.io.*;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.util.ArrayList;
 
 
 public class HelloApplication extends Application {
@@ -34,37 +32,29 @@ public class HelloApplication extends Application {
     }
 
     @Override
-    public void start(Stage stage) throws IOException, SQLException, ClassNotFoundException {
+    public void start(Stage stage) throws IOException, SQLException {
+
+//        File file1 = new File("Date.txt");
+//        FileOutputStream fileOutputStream1 = new FileOutputStream(file1);
+//        ObjectOutputStream objectOutputStream1 = new ObjectOutputStream(fileOutputStream1);
+//        objectOutputStream1.writeObject(LocalDate.of(2022, 6, 28));
+//        objectOutputStream1.close();
+//        fileOutputStream1.close();
+
+        if(civilRegistrationSystem.LoadPeople() && documentRegistrationSystem.loadEstates() && bankSystem.loadBankAccount()) {
+
+            Thread thread1 = new Thread(systems, "Management Date");
+            thread1.start();
 
 
-        File file = new File("Date.txt");
-        FileOutputStream fileOutputStream = new FileOutputStream(file);
-        ObjectOutputStream dataOutputStream = new ObjectOutputStream(fileOutputStream);
-        dataOutputStream.writeObject(LocalDate.of(2022,8,20));
-        dataOutputStream.close();
-        fileOutputStream.close();
-
-        Systems.localDate = LocalDate.of(2022,8,20);
-
-        civilRegistrationSystem.LoadPeople();
-        documentRegistrationSystem.loadEstates();
-        bankSystem.loadBankAccount();
-
-
-        System.out.println(Systems.localDate);
-
-        Thread thread1 = new Thread(systems, "Management Date");
-        thread1.start();
-
-
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("LoginPage.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 340, 450);
-        stage.setTitle("Hello!");
-        stage.setScene(scene);
-        stage.show();
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("LoginPage.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 340, 450);
+            stage.setTitle("Hello!");
+            stage.setScene(scene);
+            stage.show();
+        }
 
     }
 
     public static void main(String[] args) {launch();}
-
 }

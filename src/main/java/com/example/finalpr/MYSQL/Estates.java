@@ -1,16 +1,11 @@
 package com.example.finalpr.MYSQL;
 
-import com.example.finalpr.Availabilities.BankCard;
 import com.example.finalpr.Availabilities.Estate;
-import com.example.finalpr.Availabilities.Person;
-import com.example.finalpr.Availabilities.Wallet;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.ArrayList;
 
-import static com.example.finalpr.HelloApplication.civilRegistrationSystem;
 import static com.example.finalpr.HelloApplication.documentRegistrationSystem;
 
 public class Estates {
@@ -24,10 +19,10 @@ public class Estates {
 
     static public boolean LoadEstates() throws SQLException {
 
-
         String sqlCMD = "SELECT documentRegistrationCode, ownerID, address, date, cost FROM estates";
         ResultSet resultSet = MySQL.executeQuery(sqlCMD);
 
+        assert resultSet!=null;
         while(resultSet.next()){
 
             String documentRegistrationCode = resultSet.getString("documentRegistrationCode");
