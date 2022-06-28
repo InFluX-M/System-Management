@@ -1,5 +1,7 @@
 package com.example.finalpr;
 
+import com.example.finalpr.MYSQL.MySQL;
+import com.example.finalpr.MYSQL.No;
 import com.example.finalpr.Systems.BankSystem;
 import com.example.finalpr.Systems.CivilRegistrationSystem;
 import com.example.finalpr.Systems.DocumentRegistrationSystem;
@@ -11,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.*;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
@@ -33,13 +36,6 @@ public class HelloApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException, SQLException {
-
-//        File file1 = new File("Date.txt");
-//        FileOutputStream fileOutputStream1 = new FileOutputStream(file1);
-//        ObjectOutputStream objectOutputStream1 = new ObjectOutputStream(fileOutputStream1);
-//        objectOutputStream1.writeObject(LocalDate.of(2022, 6, 28));
-//        objectOutputStream1.close();
-//        fileOutputStream1.close();
 
         if(civilRegistrationSystem.LoadPeople() && documentRegistrationSystem.loadEstates() && bankSystem.loadBankAccount()) {
 

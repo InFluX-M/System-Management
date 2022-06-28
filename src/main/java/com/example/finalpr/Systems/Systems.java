@@ -7,6 +7,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.*;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -25,12 +26,11 @@ public class Systems implements Runnable{
         this.civilRegistrationSystem = civilRegistrationSystem;
         this.documentRegistrationSystem = documentRegistrationSystem;
 
-        File file = new File("Date.txt");
-        FileInputStream fileInputStream = new FileInputStream(file);
-        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-        localDate = (LocalDate) objectInputStream.readObject();
-        objectInputStream.close();
-        fileInputStream.close();
+        try {
+            localDate = No.getDate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -261,12 +261,7 @@ public class Systems implements Runnable{
         CivilRegistrationSystem.localDate = localDate;
         DocumentRegistrationSystem.localDate = localDate;
 
-        File file = new File("Date.txt");
-        FileOutputStream fileOutputStream = new FileOutputStream(file);
-        ObjectOutputStream dataOutputStream = new ObjectOutputStream(fileOutputStream);
-        dataOutputStream.writeObject(BankSystem.localDate);
-        dataOutputStream.close();
-        fileOutputStream.close();
+        No.changeDate(localDate);
 
     }
 }

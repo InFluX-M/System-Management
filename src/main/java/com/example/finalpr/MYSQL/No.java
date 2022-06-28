@@ -4,6 +4,7 @@ import com.example.finalpr.Systems.Systems;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 public class No {
 
@@ -51,11 +52,11 @@ public class No {
         String sqlCMD = "SELECT checkNumber FROM no";
         ResultSet resultSet = MySQL.executeQuery(sqlCMD);
 
-        assert resultSet != null;
         if(resultSet.next()){
             long cd = resultSet.getInt("checkNumber");
             String sqlCMD1 = String.format("UPDATE no SET checkNumber=%d", cd+1);
             MySQL.executeSQL(sqlCMD1);
+            checkNumber = (cd)+"";
             return cd+"";
         }
 
@@ -113,4 +114,22 @@ public class No {
         return null;
     }
 
+    static public LocalDate getDate() throws SQLException {
+
+        String sqlCMD = "SELECT localDate FROM no";
+        ResultSet resultSet = MySQL.executeQuery(sqlCMD);
+
+        assert resultSet != null;
+        if(resultSet.next()){
+            return resultSet.getDate("localDate").toLocalDate();
+        }
+
+        return null;
+
+    }
+
+    static public void changeDate(LocalDate localDate){
+        String sqlCMD = "UPDATE no SET localDate='" + localDate + "'";
+        MySQL.executeSQL(sqlCMD);
+    }
 }
