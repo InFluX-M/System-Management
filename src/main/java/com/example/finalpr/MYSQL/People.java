@@ -79,7 +79,7 @@ public class People {
 
     static public boolean deletePerson(String ID){
         String sqlCMD = String.format("DELETE FROM people WHERE ID = '%s'", ID);
-        Wallets.deleteWallet(ID);
+        boolean v = Wallets.deleteWallet(ID);
         return MySQL.executeSQL(sqlCMD);
     }
 }

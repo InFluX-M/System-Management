@@ -101,7 +101,8 @@ public class CreateNewBankAccountPageCLR implements Initializable {
                 }
             }
 
-        } catch (InputRequiredFields e) {
+        }
+        catch (InputRequiredFields e) {
 
             Alert errorAlert1 = new Alert(Alert.AlertType.ERROR);
             errorAlert1.setHeaderText("Input The Required Fields... :(");

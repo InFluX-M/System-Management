@@ -36,9 +36,10 @@ public class MainPanelAdminCLR implements Initializable {
         icon3.setImage(img3);
         icon4.setImage(img4);
 
+        System.out.println(bankSystem.getAccountNumber());
         label3.setText("Number of BankAccount Registered: "+bankSystem.getAccountNumber());
-        label2.setText("Number of Estate Registered: "+documentRegistrationSystem.getEstates().size()+"");
-        label1.setText("Number of Person Registered: "+civilRegistrationSystem.getPeople().size()+"");
+        label2.setText("Number of Estate Registered: "+documentRegistrationSystem.getEstates().size());
+        label1.setText("Number of Person Registered: "+civilRegistrationSystem.getPeople().size());
         date.setText(LocalDate.now().toString());
         date.setTextAlignment(TextAlignment.CENTER);
     }

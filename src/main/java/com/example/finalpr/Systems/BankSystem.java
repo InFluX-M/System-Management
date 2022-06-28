@@ -131,7 +131,7 @@ public class BankSystem{
 
     public String getAccountNumber(){
 
-        int i=1;
+        int i=0;
         i+=currentBankAccounts.size();
         i+=savingAccounts.size();
         i+=goodLoanAccounts.size();

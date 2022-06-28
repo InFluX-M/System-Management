@@ -24,8 +24,7 @@ public class No {
             long cd = resultSet.getInt("cardNumber");
             String sqlCMD1 = String.format("UPDATE no SET cardNumber=%d", cd+1);
             MySQL.executeSQL(sqlCMD1);
-            cardNumber = cd+"";
-            return cardNumber;
+            return cd+"";
         }
 
         return null;
@@ -41,8 +40,7 @@ public class No {
             long cd = resultSet.getInt("CVV2");
             String sqlCMD1 = String.format("UPDATE no SET CVV2=%d", cd+1);
             MySQL.executeSQL(sqlCMD1);
-            CVV2 = cd+"";
-            return CVV2;
+            return cd+"";
         }
 
         return null;
@@ -58,8 +56,7 @@ public class No {
             long cd = resultSet.getInt("checkNumber");
             String sqlCMD1 = String.format("UPDATE no SET checkNumber=%d", cd+1);
             MySQL.executeSQL(sqlCMD1);
-            checkNumber = cd+"";
-            return checkNumber;
+            return cd+"";
         }
 
         return null;

@@ -53,8 +53,37 @@ public class CardRegistrationPanelCLR implements Initializable {
 
         if(bankSystem.getNowBankAccount() instanceof CurrentAccount currentAccount){
 
-            if(currentAccount.getBankCard()==null){
+            if(currentAccount.getBankCard() == null){
 
+                if (currentAccount.getBankCard() == null) {
+                    String cardNumber = null;
+                    try {
+                        cardNumber = No.getCardNumber();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+
+                    LocalDate expirationDate = LocalDate.now();
+                    String CVV2 = null;
+                    try {
+                        CVV2 = No.getCVV2();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+
+                    BankCard bankCard = new BankCard(cardNumber, expirationDate, CVV2);
+                    bankSystem.addBankCard(bankCard);
+                }
+            }
+
+            CardNumber.setText("Card Number: "+currentAccount.getBankCard().getCardNumber());
+            CVV2.setText("CVV2: "+currentAccount.getBankCard().getCVV2());
+            ExpirationDate.setText("Expiration Date: "+currentAccount.getBankCard().getExpirationDate());
+
+        }
+        else if(bankSystem.getNowBankAccount() instanceof GoodLoanAccount goodLoanAccount) {
+
+            if (goodLoanAccount.getBankCard() == null) {
                 String cardNumber = null;
                 try {
                     cardNumber = No.getCardNumber();
@@ -71,30 +100,14 @@ public class CardRegistrationPanelCLR implements Initializable {
                 }
 
                 BankCard bankCard = new BankCard(cardNumber, expirationDate, CVV2);
-                assert bankSystem.addBankCard(bankCard);
-            }
-
-            CardNumber.setText("Card Number: "+No.cardNumber);
-            CVV2.setText("CVV2: " + No.CVV2);
-            ExpirationDate.setText("EX-Date: "+currentAccount.getBankCard().getExpirationDate()+"");
-
-        }
-        else if(bankSystem.getNowBankAccount() instanceof GoodLoanAccount goodLoanAccount) {
-
-            if (goodLoanAccount.getBankCard() == null) {
-                String[] inf = bankSystem.getBankCardInformation().split(",");
-                String cardNumber = inf[0];
-                LocalDate expirationDate = LocalDate.now();
-                String CVV2 = inf[1];
-
-                BankCard bankCard = new BankCard(cardNumber, expirationDate, CVV2);
                 bankSystem.addBankCard(bankCard);
             }
 
-            CardNumber.setText(goodLoanAccount.getBankCard().getCardNumber());
-            CVV2.setText(goodLoanAccount.getBankCard().getCVV2());
-            ExpirationDate.setText(goodLoanAccount.getBankCard().getExpirationDate() + "");
+            CardNumber.setText("Card Number: "+goodLoanAccount.getBankCard().getCardNumber());
+            CVV2.setText("CVV2: "+goodLoanAccount.getBankCard().getCVV2());
+            ExpirationDate.setText("Expiration Date: "+goodLoanAccount.getBankCard().getExpirationDate());
         }
+
     }
 
 }
