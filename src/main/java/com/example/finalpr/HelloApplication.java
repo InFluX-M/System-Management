@@ -37,32 +37,22 @@ public class HelloApplication extends Application {
     public void start(Stage stage) throws IOException, SQLException, ClassNotFoundException {
 
 
-        File file1 = new File("Date.txt");
-        FileOutputStream fileOutputStream1 = new FileOutputStream(file1);
-        ObjectOutputStream objectOutputStream1 = new ObjectOutputStream(fileOutputStream1);
-        objectOutputStream1.writeObject(BankSystem.localDate);
-        objectOutputStream1.close();
-        fileOutputStream1.close();
-//
-//        File file2 = new File("DateBS.txt");
-//        FileOutputStream fileOutputStream2 = new FileOutputStream(file2);
-//        ObjectOutputStream objectOutputStream2 = new ObjectOutputStream(fileOutputStream2);
-//        objectOutputStream2.writeObject(BankSystem.localDate);
-//        objectOutputStream2.close();
-//        fileOutputStream2.close();
-//
-//        File file3 = new File("DateDRS.txt");
-//        FileOutputStream fileOutputStream3 = new FileOutputStream(file3);
-//        ObjectOutputStream objectOutputStream3 = new ObjectOutputStream(fileOutputStream3);
-//        objectOutputStream3.writeObject(BankSystem.localDate);
-//        objectOutputStream3.close();
-//        fileOutputStream3.close();
+        File file = new File("Date.txt");
+        FileOutputStream fileOutputStream = new FileOutputStream(file);
+        ObjectOutputStream dataOutputStream = new ObjectOutputStream(fileOutputStream);
+        dataOutputStream.writeObject(LocalDate.of(2022,8,20));
+        dataOutputStream.close();
+        fileOutputStream.close();
+
+        Systems.localDate = LocalDate.of(2022,8,20);
 
         civilRegistrationSystem.LoadPeople();
         documentRegistrationSystem.loadEstates();
         bankSystem.loadBankAccount();
 
-        ArrayList<CurrentAccount> b = bankSystem.getCurrentBankAccounts();
+
+        System.out.println(Systems.localDate);
+
         Thread thread1 = new Thread(systems, "Management Date");
         thread1.start();
 

@@ -16,7 +16,7 @@ import static com.example.finalpr.HelloApplication.systems;
 
 public class DocumentRegistrationSystem{
 
-    public static LocalDate localDate = LocalDate.now();
+    public static LocalDate localDate;
 
     private Estate nowEstate;
     private ArrayList<Estate> estates;

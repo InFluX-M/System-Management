@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class BankSystem{
 
-    public static LocalDate localDate = LocalDate.now();
+    public static LocalDate localDate;
 
     private static BankSystem singletonBankSystem;
     private BankAccount nowBankAccount;

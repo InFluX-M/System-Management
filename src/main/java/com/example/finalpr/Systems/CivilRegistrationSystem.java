@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class CivilRegistrationSystem {
 
-    public static LocalDate localDate = LocalDate.now();
+    public static LocalDate localDate;
 
     private Person nowPerson;
     private ArrayList<Person> people;

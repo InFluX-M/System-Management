@@ -7,9 +7,11 @@ import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import static com.example.finalpr.HelloApplication.bankSystem;
+
 public class Systems implements Runnable{
 
-    public static LocalDate localDate = LocalDate.now();
+    public static LocalDate localDate;
 
     private BankSystem bankSystem;
     private CivilRegistrationSystem civilRegistrationSystem;
@@ -207,11 +209,39 @@ public class Systems implements Runnable{
         return true;
     }
 
+    public boolean getSavingMoney(){
+
+        SavingAccount savingAccount = (SavingAccount) bankSystem.getNowBankAccount();
+        LocalDate DateDesignated = savingAccount.getDateCreate().plusDays(savingAccount.getDesignatedTime());
+
+        if(localDate.compareTo(DateDesignated) > 0){
+            double money = civilRegistrationSystem.searchPerson(savingAccount.getOwnerID()).getWallet().getMoney();
+            money += savingAccount.getBalance()+(savingAccount.getBalance()*savingAccount.getBankInterestPercentage()/100);
+
+            civilRegistrationSystem.searchPerson(savingAccount.getOwnerID()).getWallet().setMoney(money);
+            Wallets.updateWallets(savingAccount.getOwnerID(), money);
+            SavingBankAccounts.updateSavingBankAccounts(savingAccount.getAccountNumber(), savingAccount.getOwnerID(),
+                    0.0, savingAccount.getDateCreate(), savingAccount.getPoint(), savingAccount.getBankInterestPercentage(),
+                    savingAccount.getKindBankInterestPercentage(), savingAccount.getDesignatedTime());
+        }
+        else{
+            double money = civilRegistrationSystem.searchPerson(savingAccount.getOwnerID()).getWallet().getMoney();
+            civilRegistrationSystem.searchPerson(savingAccount.getOwnerID()).getWallet().setMoney(money);
+            Wallets.updateWallets(savingAccount.getOwnerID(), money);
+            SavingBankAccounts.updateSavingBankAccounts(savingAccount.getAccountNumber(), savingAccount.getOwnerID(),
+                    0.0, savingAccount.getDateCreate(), savingAccount.getPoint(), savingAccount.getBankInterestPercentage(),
+                    savingAccount.getKindBankInterestPercentage(), savingAccount.getDesignatedTime());
+        }
+
+        return true;
+
+    }
+
     @Override
     public void run() {
 
         try {
-            Thread.sleep(3000);
+            Thread.sleep(3000000);
             changeDay();
             paidInstallmentsBankAccount();
 
