@@ -1,6 +1,7 @@
 package com.example.finalpr.Systems;
 
 import com.example.finalpr.Availabilities.*;
+import com.example.finalpr.HelloApplication;
 import com.example.finalpr.MYSQL.*;
 
 import java.io.*;
@@ -9,7 +10,7 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
 
-public class BankSystem implements Runnable{
+public class BankSystem{
 
     public static LocalDate localDate = LocalDate.now();
 
@@ -48,6 +49,18 @@ public class BankSystem implements Runnable{
         return null;
     }
 
+    public String getLoanNumber(){
+        int i=1;
+        ArrayList<BankAccount> bankAccounts = new ArrayList<>();
+        bankAccounts.addAll(currentBankAccounts);
+        bankAccounts.addAll(savingAccounts);
+        bankAccounts.addAll(goodLoanAccounts);
+        for(BankAccount bankAccount : bankAccounts){
+            i+=bankAccount.getLoans().size();
+        }
+        return i+"";
+    }
+
     public String getBankCardInformation(){
         int cardNumber = 0;
         int CVV2 = 0;
@@ -75,12 +88,12 @@ public class BankSystem implements Runnable{
         Boolean valid2 = SavingBankAccounts.loadSavingBankAccounts();
         Boolean valid3 = GoodLoanBankAccounts.loadGoodLoanBankAccounts();
 
-        File file = new File("DateBS.txt");
-        FileInputStream fileInputStream = new FileInputStream(file);
-        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-        localDate = (LocalDate) objectInputStream.readObject();
-        objectInputStream.close();
-        fileInputStream.close();
+//        File file = new File("DateBS.txt");
+//        FileInputStream fileInputStream = new FileInputStream(file);
+//        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+//        localDate = (LocalDate) objectInputStream.readObject();
+//        objectInputStream.close();
+//        fileInputStream.close();
 
         return valid1 && valid2 && valid3;
     }
@@ -194,40 +207,4 @@ public class BankSystem implements Runnable{
                 bankCheck.getAmount(), bankCheck.getDateRegister(), bankCheck.isPassed());
     }
 
-    public boolean changeDay() throws IOException {
-        int year = localDate.getYear();
-        int month = localDate.getMonthValue();
-        int day = localDate.getDayOfMonth()+1;
-
-        if(day == localDate.lengthOfMonth()+1){
-            month++;
-            day = 1;
-        }
-        localDate = LocalDate.of(year, month, day);
-
-        File file = new File("DateBS.txt");
-        FileOutputStream fileOutputStream = new FileOutputStream(file);
-        ObjectOutputStream dataOutputStream = new ObjectOutputStream(fileOutputStream);
-        dataOutputStream.writeObject(BankSystem.localDate);
-        dataOutputStream.close();
-        fileOutputStream.close();
-
-        return true;
-    }
-
-    @Override
-    public void run() {
-
-        while(true){
-            try {
-
-                Thread.sleep(300000);
-                changeDay();
-
-            } catch (InterruptedException | IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-    }
 }

@@ -13,7 +13,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 
-public class CivilRegistrationSystem implements Runnable{
+public class CivilRegistrationSystem {
 
     public static LocalDate localDate = LocalDate.now();
 
@@ -34,12 +34,12 @@ public class CivilRegistrationSystem implements Runnable{
 
     public boolean LoadPeople() throws SQLException, IOException, ClassNotFoundException {
 
-        File file = new File("DateCRS.txt");
-        FileInputStream fileInputStream = new FileInputStream(file);
-        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-        localDate = (LocalDate) objectInputStream.readObject();
-        objectInputStream.close();
-        fileInputStream.close();
+//        File file = new File("DateCRS.txt");
+//        FileInputStream fileInputStream = new FileInputStream(file);
+//        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+//        localDate = (LocalDate) objectInputStream.readObject();
+//        objectInputStream.close();
+//        fileInputStream.close();
 
         return People.LoadPeople();
     }
@@ -103,40 +103,4 @@ public class CivilRegistrationSystem implements Runnable{
         return false;
     }
 
-    public boolean changeDay() throws IOException {
-        int year = localDate.getYear();
-        int month = localDate.getMonthValue();
-        int day = localDate.getDayOfMonth()+1;
-
-        if(day == localDate.lengthOfMonth()+1){
-            month++;
-            day = 1;
-        }
-        localDate = LocalDate.of(year, month, day);
-
-        File file = new File("DateCRS.txt");
-        FileOutputStream fileOutputStream = new FileOutputStream(file);
-        ObjectOutputStream dataOutputStream = new ObjectOutputStream(fileOutputStream);
-        dataOutputStream.writeObject(CivilRegistrationSystem.localDate);
-        dataOutputStream.close();
-        fileOutputStream.close();
-
-        return true;
-    }
-
-    @Override
-    public void run() {
-
-        while(true){
-            try {
-
-                Thread.sleep(300000);
-                changeDay();
-
-            } catch (InterruptedException | IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-    }
 }

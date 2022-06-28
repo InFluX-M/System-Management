@@ -144,7 +144,16 @@ public class BankAccountPanelCLR implements Initializable {
 
     @FXML
     void Loans(MouseEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("LoanPage.fxml"));
+            Stage s1 = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            s1.setScene(scene);
+            s1.show();
+        }
+        catch (IOException e) {
 
+        }
     }
 
     @FXML
@@ -172,7 +181,8 @@ public class BankAccountPanelCLR implements Initializable {
     }
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public void initialize(URL url, ResourceBundle resourceBundle){
+
         Image img1 = new Image("C:\\Users\\Laptopkaran\\Desktop\\Photoo\\Deposit.png");
         Image img2 = new Image("C:\\Users\\Laptopkaran\\Desktop\\Photoo\\Withdrawal.png");
         Image img3 = new Image("C:\\Users\\Laptopkaran\\Desktop\\Photoo\\Transfer.png");
@@ -201,5 +211,6 @@ public class BankAccountPanelCLR implements Initializable {
             GC.setDisable(true);
             PC.setDisable(true);
         }
+
     }
 }

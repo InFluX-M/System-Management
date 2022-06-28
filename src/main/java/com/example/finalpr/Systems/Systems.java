@@ -3,19 +3,31 @@ package com.example.finalpr.Systems;
 import com.example.finalpr.Availabilities.*;
 import com.example.finalpr.MYSQL.*;
 
+import java.io.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Systems {
+public class Systems implements Runnable{
+
+    public static LocalDate localDate = LocalDate.now();
 
     private BankSystem bankSystem;
     private CivilRegistrationSystem civilRegistrationSystem;
     private DocumentRegistrationSystem documentRegistrationSystem;
     private static Systems singletonSystems;
 
-    public Systems(BankSystem bankSystem, CivilRegistrationSystem civilRegistrationSystem, DocumentRegistrationSystem documentRegistrationSystem) {
+    public Systems(BankSystem bankSystem, CivilRegistrationSystem civilRegistrationSystem, DocumentRegistrationSystem documentRegistrationSystem) throws IOException, ClassNotFoundException {
         this.bankSystem = bankSystem;
         this.civilRegistrationSystem = civilRegistrationSystem;
         this.documentRegistrationSystem = documentRegistrationSystem;
+
+        File file = new File("Date.txt");
+        FileInputStream fileInputStream = new FileInputStream(file);
+        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+        localDate = (LocalDate) objectInputStream.readObject();
+        objectInputStream.close();
+        fileInputStream.close();
+
     }
 
     public BankSystem getBankSystem() {
@@ -39,7 +51,7 @@ public class Systems {
         this.documentRegistrationSystem = documentRegistrationSystem;
     }
 
-    public static Systems getInstanceSystems(BankSystem bankSystem, CivilRegistrationSystem civilRegistrationSystem, DocumentRegistrationSystem documentRegistrationSystem){
+    public static Systems getInstanceSystems(BankSystem bankSystem, CivilRegistrationSystem civilRegistrationSystem, DocumentRegistrationSystem documentRegistrationSystem) throws IOException, ClassNotFoundException {
 
         if(singletonSystems == null){
             singletonSystems = new Systems(bankSystem, civilRegistrationSystem, documentRegistrationSystem);
@@ -154,5 +166,86 @@ public class Systems {
         }
 
         return false;
+    }
+
+    public boolean addLoan(Loan loan){
+        double money = civilRegistrationSystem.searchPerson(bankSystem.getNowBankAccount().getOwnerID()).getWallet().getMoney();
+        money += loan.getAmount();
+        civilRegistrationSystem.searchPerson(bankSystem.getNowBankAccount().getOwnerID()).getWallet().setMoney(money);
+        Wallets.updateWallets(bankSystem.getNowBankAccount().getOwnerID(), money);
+
+        bankSystem.getNowBankAccount().getLoans().add(loan);
+        return Loans.insertLoan(loan.getLoanNumber(), loan.getAmount(), loan.getNumberOfInstallments(), loan.getNumberOfInstallmentsPaid(),
+                loan.isActive(), bankSystem.getNowBankAccount().getAccountNumber());
+
+    }
+
+    public boolean paidInstallmentsBankAccount(){
+
+        ArrayList<BankAccount> bankAccounts = new ArrayList<>();
+        bankAccounts.addAll(bankSystem.getCurrentBankAccounts());
+        bankAccounts.addAll(bankSystem.getSavingAccounts());
+        bankAccounts.addAll(bankSystem.getGoodLoanAccounts());
+
+        for(BankAccount bankAccount : bankAccounts){
+            for(Loan loan : bankAccount.getLoans()){
+
+                double installment = (loan.getAmount() * (1.0+0.1)) / (1.0*loan.getNumberOfInstallments());
+                double money = civilRegistrationSystem.searchPerson(bankAccount.getOwnerID()).getWallet().getMoney() - installment;
+                civilRegistrationSystem.searchPerson(bankAccount.getOwnerID()).getWallet().setMoney(money);
+                Wallets.updateWallets(bankAccount.getOwnerID(), money);
+                boolean active;
+                if(loan.getNumberOfInstallments() > loan.getNumberOfInstallmentsPaid()) active = true;
+                else active = false;
+                loan.setActive(active);
+                loan.setNumberOfInstallmentsPaid(loan.getNumberOfInstallmentsPaid()+1);
+                Loans.updateLoan(loan.getLoanNumber(), loan.getAmount(), loan.getNumberOfInstallments(),
+                        loan.getNumberOfInstallmentsPaid(), loan.isActive(), bankAccount.getAccountNumber());
+            }
+        }
+
+        return true;
+    }
+
+    @Override
+    public void run() {
+
+        try {
+            Thread.sleep(3000);
+            changeDay();
+            paidInstallmentsBankAccount();
+
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public boolean changeDay() throws IOException {
+        int year = localDate.getYear();
+        int month = localDate.getMonthValue();
+        int day = localDate.getDayOfMonth()+1;
+
+        if(day == localDate.lengthOfMonth()+1){
+            month++;
+            day = 1;
+            if(month == 13){
+                year++;
+                month = 1;
+            }
+        }
+        localDate = LocalDate.of(year, month, day);
+
+        BankSystem.localDate = localDate;
+        CivilRegistrationSystem.localDate = localDate;
+        DocumentRegistrationSystem.localDate = localDate;
+
+        File file = new File("Date.txt");
+        FileOutputStream fileOutputStream = new FileOutputStream(file);
+        ObjectOutputStream dataOutputStream = new ObjectOutputStream(fileOutputStream);
+        dataOutputStream.writeObject(BankSystem.localDate);
+        dataOutputStream.close();
+        fileOutputStream.close();
+
+        return true;
     }
 }
