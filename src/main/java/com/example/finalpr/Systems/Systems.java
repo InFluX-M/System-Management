@@ -222,9 +222,9 @@ public class Systems implements Runnable{
         SavingAccount savingAccount = (SavingAccount) bankSystem.getNowBankAccount();
         LocalDate DateDesignated = savingAccount.getDateCreate().plusDays(savingAccount.getDesignatedTime());
 
-        double money = civilRegistrationSystem.searchPerson(savingAccount.getOwnerID()).getWallet().getMoney();
+        double money = civilRegistrationSystem.searchPerson(savingAccount.getOwnerID()).getWallet().getMoney()+savingAccount.getBalance();
         if(localDate.compareTo(DateDesignated) > 0){
-            money += savingAccount.getBalance()+(savingAccount.getBalance()*savingAccount.getBankInterestPercentage()/100);
+            money += (1.0*savingAccount.getBalance()*savingAccount.getBankInterestPercentage()/100);
 
         }
         civilRegistrationSystem.searchPerson(savingAccount.getOwnerID()).getWallet().setMoney(money);
@@ -241,7 +241,7 @@ public class Systems implements Runnable{
 
         while(true){
             try {
-                Thread.sleep(5000);
+                Thread.sleep(1000);
                 changeDay();
                 paidInstallmentsBankAccount();
 

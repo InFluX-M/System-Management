@@ -16,7 +16,10 @@ public class BankChecks {
 
     static public boolean updateBankCheck(String checkNumber, String accountNumberSender, String accountNumberReceiver, double amount, LocalDate dateRegister, boolean passed){
 
-        String sqlCMD = String.format("UPDATE bankchecks SET accountNumberSender='%s', accountNumberReceiver='%s', amount=%f, dateRegister='"+dateRegister+"', passed='"+passed+"' WHERE checkNumber='%s'",accountNumberSender,accountNumberReceiver,amount,checkNumber);
+        int bool=0;
+        if(passed) bool=1;
+
+        String sqlCMD = String.format("UPDATE bankchecks SET accountNumberSender='%s', accountNumberReceiver='%s', amount=%f, dateRegister='"+dateRegister+"', passed='"+bool+"' WHERE checkNumber='%s'",accountNumberSender,accountNumberReceiver,amount,checkNumber);
         return MySQL.executeSQL(sqlCMD);
     }
 

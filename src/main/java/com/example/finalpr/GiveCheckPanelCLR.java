@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -39,13 +40,16 @@ public class GiveCheckPanelCLR implements Initializable {
     private Label statue;
 
     @FXML
+    private DatePicker Date;
+
+    @FXML
     void Give() {
 
         String checkNumber = No.checkNumber;
         String accountNumberSender = bankSystem.getNowBankAccount().getAccountNumber();
         String accountNumberReceiver = AccountNumber.getText();
         double amount = Double.parseDouble(Amount.getText());
-        LocalDate dateRegister = Systems.localDate;
+        LocalDate dateRegister = Date.getValue();
 
         BankCheck bankCheck = new BankCheck(checkNumber, accountNumberSender, accountNumberReceiver, amount, dateRegister);
 
