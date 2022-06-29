@@ -11,6 +11,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
@@ -26,11 +28,15 @@ public class LoginPageCLR implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        Image img = new Image("F:\\FinalPr\\Photoo\\data-complexity.png");
+        sys.setImage(img);
         comboRules.getItems().addAll("Admin", "User");
     }
 
+
     @FXML
-    private Circle circle1;
+    private ImageView sys;
 
     @FXML
     private JFXComboBox<String> comboRules;

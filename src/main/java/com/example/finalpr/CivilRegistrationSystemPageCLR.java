@@ -98,9 +98,9 @@ public class CivilRegistrationSystemPageCLR implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Image img11 = new Image("C:\\Users\\Laptopkaran\\Desktop\\Photoo\\verify.png");
-        Image img22 = new Image("C:\\Users\\Laptopkaran\\Desktop\\Photoo\\edit.png");
-        Image img33 = new Image("C:\\Users\\Laptopkaran\\Desktop\\Photoo\\delete (1).png");
+        Image img11 = new Image("F:\\FinalPr\\Photoo\\verify.png");
+        Image img22 = new Image("F:\\FinalPr\\Photoo\\edit.png");
+        Image img33 = new Image("F:\\FinalPr\\Photoo\\delete (1).png");
 
         img1.setImage(img11);
         img2.setImage(img22);

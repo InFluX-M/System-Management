@@ -26,10 +26,10 @@ public class MainPanelAdminCLR implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        Image img1 = new Image("C:\\Users\\Laptopkaran\\Desktop\\Photoo\\1.png");
-        Image img2 = new Image("C:\\Users\\Laptopkaran\\Desktop\\Photoo\\2.jpg");
-        Image img3 = new Image("C:\\Users\\Laptopkaran\\Desktop\\Photoo\\3.png");
-        Image img4 = new Image("C:\\Users\\Laptopkaran\\Desktop\\Photoo\\4.png");
+        Image img1 = new Image("F:\\FinalPr\\Photoo\\1.png");
+        Image img2 = new Image("F:\\FinalPr\\Photoo\\2.jpg");
+        Image img3 = new Image("F:\\FinalPr\\Photoo\\3.png");
+        Image img4 = new Image("F:\\FinalPr\\Photoo\\4.png");
 
         icon1.setImage(img1);
         icon2.setImage(img2);

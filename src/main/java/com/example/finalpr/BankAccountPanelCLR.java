@@ -193,14 +193,14 @@ public class BankAccountPanelCLR implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
 
-        Image img1 = new Image("C:\\Users\\Laptopkaran\\Desktop\\Photoo\\Deposit.png");
-        Image img2 = new Image("C:\\Users\\Laptopkaran\\Desktop\\Photoo\\Withdrawal.png");
-        Image img3 = new Image("C:\\Users\\Laptopkaran\\Desktop\\Photoo\\Transfer.png");
-        Image img4 = new Image("C:\\Users\\Laptopkaran\\Desktop\\Photoo\\CreditCard.png");
-        Image img5 = new Image("C:\\Users\\Laptopkaran\\Desktop\\Photoo\\Check.png");
-        Image img6 = new Image("C:\\Users\\Laptopkaran\\Desktop\\Photoo\\Check.png");
-        Image img7 = new Image("C:\\Users\\Laptopkaran\\Desktop\\Photoo\\loan.png");
-        Image img8 = new Image("C:\\Users\\Laptopkaran\\Desktop\\Photoo\\check-list.png");
+        Image img1 = new Image("F:\\FinalPr\\Photoo\\Deposit.png");
+        Image img2 = new Image("F:\\FinalPr\\Photoo\\Withdrawal.png");
+        Image img3 = new Image("F:\\FinalPr\\Photoo\\Transfer.png");
+        Image img4 = new Image("F:\\FinalPr\\Photoo\\CreditCard.png");
+        Image img5 = new Image("F:\\FinalPr\\Photoo\\Check.png");
+        Image img6 = new Image("F:\\FinalPr\\Photoo\\Check.png");
+        Image img7 = new Image("F:\\FinalPr\\Photoo\\loan.png");
+        Image img8 = new Image("F:\\FinalPr\\Photoo\\check-list.png");
 
         imgD.setImage(img1);
         imgW.setImage(img2);
