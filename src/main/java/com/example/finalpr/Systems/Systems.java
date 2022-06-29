@@ -3,9 +3,6 @@ package com.example.finalpr.Systems;
 import com.example.finalpr.Availabilities.*;
 import com.example.finalpr.Exceptions.NotEnoughMoney;
 import com.example.finalpr.MYSQL.*;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import javafx.scene.control.Alert;
 
 import java.io.*;
 import java.sql.SQLException;
@@ -162,7 +159,7 @@ public class Systems implements Runnable{
 
     }
 
-    public boolean paidInstallmentsBankAccount(){
+    public void paidInstallmentsBankAccount(){
 
         ArrayList<BankAccount> bankAccounts = new ArrayList<>();
         bankAccounts.addAll(bankSystem.getCurrentBankAccounts());
@@ -213,8 +210,6 @@ public class Systems implements Runnable{
                 }
             }
         }
-
-        return true;
     }
 
     public boolean getSavingMoney(){
@@ -241,7 +236,7 @@ public class Systems implements Runnable{
 
         while(true){
             try {
-                Thread.sleep(1000);
+                Thread.sleep(100000);
                 changeDay();
                 paidInstallmentsBankAccount();
 

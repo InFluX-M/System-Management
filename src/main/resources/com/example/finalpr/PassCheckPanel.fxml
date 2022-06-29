@@ -6,19 +6,25 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.finalpr.PassCheckPanelCLR">
+<AnchorPane prefHeight="624.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.finalpr.PassCheckPanelCLR">
    <children>
       <Label prefHeight="83.0" prefWidth="600.0" style="-fx-background-color: #C19A6B;" text="                                          BankCheck Pass" textFill="#474636">
          <font>
             <Font name="Segoe UI Black" size="20.0" />
          </font>
       </Label>
-      <JFXListView fx:id="BankCheckList" layoutX="30.0" layoutY="106.0" prefHeight="400.0" prefWidth="540.0" />
-      <JFXButton layoutX="500.0" layoutY="530.0" onMouseClicked="#exit" prefHeight="56.0" prefWidth="85.0" style="-fx-background-color: #7b2b2a;" text="Exit" textFill="WHITE">
+      <JFXListView fx:id="BankCheckList" layoutX="26.0" layoutY="138.0" prefHeight="400.0" prefWidth="548.0" />
+      <JFXButton layoutX="500.0" layoutY="554.0" onMouseClicked="#exit" prefHeight="56.0" prefWidth="85.0" style="-fx-background-color: #7b2b2a;" text="Exit" textFill="WHITE">
          <font>
             <Font name="B Aria" size="12.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="395.0" layoutY="530.0" onMouseClicked="#back" prefHeight="56.0" prefWidth="94.0" style="-fx-background-color: #7F525D;" text="Back" textFill="WHITE" />
+      <JFXButton layoutX="395.0" layoutY="554.0" onMouseClicked="#back" prefHeight="56.0" prefWidth="94.0" style="-fx-background-color: #7F525D;" text="Back" textFill="WHITE" />
+      <Label fx:id="CheckNumber" layoutX="36.0" layoutY="103.0" prefHeight="34.0" prefWidth="94.0" style="-fx-background-color: #CCCCFF;" text="CheckNumber" />
+      <Label fx:id="AccountNumber" layoutX="130.0" layoutY="103.0" prefHeight="34.0" prefWidth="94.0" style="-fx-background-color: #CCCCFF;" text="AccountNumber" />
+      <Label fx:id="Amount" layoutX="224.0" layoutY="103.0" prefHeight="34.0" prefWidth="94.0" style="-fx-background-color: #CCCCFF;" text="Amount" />
+      <Label fx:id="DateRegister" layoutX="318.0" layoutY="103.0" prefHeight="34.0" prefWidth="136.0" style="-fx-background-color: #CCCCFF;" text="DateRegister" />
+      <Label fx:id="Passed" layoutX="454.0" layoutY="103.0" prefHeight="34.0" prefWidth="57.0" style="-fx-background-color: #CCCCFF;" text="Passed" />
+      <Label layoutX="512.0" layoutY="103.0" prefHeight="34.0" prefWidth="50.0" style="-fx-background-color: #CCCCFF;" text="Pass" />
    </children>
 </AnchorPane>

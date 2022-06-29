@@ -36,7 +36,6 @@ public class MainPanelAdminCLR implements Initializable {
         icon3.setImage(img3);
         icon4.setImage(img4);
 
-        System.out.println(bankSystem.getAccountNumber());
         label3.setText("Number of BankAccount Registered: "+bankSystem.getAccountNumber());
         label2.setText("Number of Estate Registered: "+documentRegistrationSystem.getEstates().size());
         label1.setText("Number of Person Registered: "+civilRegistrationSystem.getPeople().size());
@@ -70,17 +69,6 @@ public class MainPanelAdminCLR implements Initializable {
 
     @FXML
     void BankSystem(MouseEvent event) {
-
-        try {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("BankSystemPage.fxml")));
-            Stage s1 = (Stage) ((Node)event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            s1.setScene(scene);
-            s1.show();
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
 
     }
 

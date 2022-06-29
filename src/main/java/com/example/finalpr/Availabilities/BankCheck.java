@@ -4,11 +4,11 @@ import java.time.LocalDate;
 
 public class BankCheck {
 
-    private String checkNumber;
-    private String accountNumberSender;
-    private String accountNumberReceiver;
+    private final String checkNumber;
+    private final String accountNumberSender;
+    private final String accountNumberReceiver;
     private double amount;
-    private LocalDate dateRegister;
+    private final LocalDate dateRegister;
     private boolean passed;
 
     public BankCheck(String checkNumber, String accountNumberSender, String accountNumberReceiver, double amount, LocalDate dateRegister){
@@ -31,22 +31,12 @@ public class BankCheck {
         return checkNumber;
     }
 
-    public void setCheckNumber(String checkNumber) {
-        this.checkNumber = checkNumber;
-    }
-
     public String getAccountNumberSender() {
         return accountNumberSender;
-    }
-    public void setAccountNumberSender(String accountNumberSender) {
-        this.accountNumberSender = accountNumberSender;
     }
 
     public String getAccountNumberReceiver() {
         return accountNumberReceiver;
-    }
-    public void setAccountNumberReceiver(String accountNumberReceiver) {
-        this.accountNumberReceiver = accountNumberReceiver;
     }
 
     public double getAmount() {
@@ -58,9 +48,6 @@ public class BankCheck {
 
     public LocalDate getDateRegister() {
         return dateRegister;
-    }
-    public void setDateRegister(LocalDate dateRegister) {
-        this.dateRegister = dateRegister;
     }
 
 }

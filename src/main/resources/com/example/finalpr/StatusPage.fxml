@@ -1,23 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXListView?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="280.0" prefWidth="600.0" style="-fx-background-color: #CFECEC;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.finalpr.StatusPageCLR">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="644.0" prefWidth="600.0" style="-fx-background-color: #CFECEC;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.finalpr.StatusPageCLR">
    <children>
-      <JFXButton layoutY="214.0" onMouseClicked="#Back" prefHeight="66.0" prefWidth="600.0" style="-fx-background-color: #686A6C;" text="Back" />
-      <Label fx:id="status" layoutX="341.0" layoutY="132.0" prefHeight="26.0" prefWidth="227.0" style="-fx-background-color: #FBF6D9;" textFill="#ac3030" />
+      <JFXButton layoutY="578.0" onMouseClicked="#Back" prefHeight="66.0" prefWidth="600.0" style="-fx-background-color: #686A6C;" text="Back" />
+      <Label fx:id="status" layoutX="319.0" layoutY="494.0" prefHeight="26.0" prefWidth="227.0" style="-fx-background-color: #FBF6D9;" textFill="#ac3030" />
       <Label prefHeight="82.0" prefWidth="600.0" style="-fx-background-color: #C19A6B;" text="                                         Status Panel" textFill="#474636">
          <font>
             <Font name="Segoe UI Black" size="20.0" />
          </font>
       </Label>
-      <JFXButton fx:id="GetSavingMoney" layoutX="76.0" layoutY="98.0" onMouseClicked="#SavingMoney" prefHeight="93.0" prefWidth="159.0" style="-fx-background-color: #e5a800;" text="Get SavingMoney">
+      <JFXButton fx:id="GetSavingMoney" layoutX="54.0" layoutY="460.0" onMouseClicked="#SavingMoney" prefHeight="93.0" prefWidth="159.0" style="-fx-background-color: #e5a800;" text="Get SavingMoney">
          <font>
             <Font name="Segoe UI Light" size="14.0" />
          </font>
       </JFXButton>
+      <JFXListView fx:id="ListLoan" layoutX="61.0" layoutY="123.0" prefHeight="235.0" prefWidth="477.0" />
+      <AnchorPane fx:id="LoanItem" layoutX="68.0" layoutY="83.0" prefHeight="34.0" prefWidth="464.0">
+         <children>
+            <Label layoutY="5.0" prefHeight="34.0" prefWidth="88.0" style="-fx-background-color: #CCCCFF;" text="LoanNumber" />
+            <Label layoutX="182.0" layoutY="5.0" prefHeight="34.0" prefWidth="94.0" style="-fx-background-color: #CCCCFF;" text="No Installments" />
+            <Label layoutX="88.0" layoutY="5.0" prefHeight="34.0" prefWidth="94.0" style="-fx-background-color: #CCCCFF;" text="Amount" />
+            <Label layoutX="276.0" layoutY="5.0" prefHeight="34.0" prefWidth="136.0" style="-fx-background-color: #CCCCFF;" text="No Installments Paid" />
+            <Label layoutX="412.0" layoutY="5.0" prefHeight="34.0" prefWidth="50.0" style="-fx-background-color: #CCCCFF;" text="Active" />
+         </children>
+      </AnchorPane>
+      <Label fx:id="Balance" layoutX="61.0" layoutY="398.0" prefHeight="34.0" prefWidth="203.0" text="Balance">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="Point" layoutX="342.0" layoutY="398.0" prefHeight="34.0" prefWidth="203.0" text="Point">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

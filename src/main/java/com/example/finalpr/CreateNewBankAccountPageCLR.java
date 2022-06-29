@@ -5,6 +5,7 @@ import com.example.finalpr.Availabilities.CurrentAccount;
 import com.example.finalpr.Availabilities.GoodLoanAccount;
 import com.example.finalpr.Availabilities.SavingAccount;
 import com.example.finalpr.Exceptions.InputRequiredFields;
+import com.example.finalpr.Exceptions.InvalidIInput;
 import com.example.finalpr.MYSQL.No;
 import com.example.finalpr.Systems.Systems;
 import com.jfoenix.controls.JFXComboBox;
@@ -62,16 +63,16 @@ public class CreateNewBankAccountPageCLR implements Initializable {
     @FXML
     void Register() {
 
-        String accountNumber = No.accountNumber;
-        String ownerID = OwnerID.getText();
-        double balance = 0.0;
-        LocalDate dateCreate = Systems.localDate;
-        int point = 0;
-        String kind = KindBankAccount.getValue();
-
         try {
-            InputRequiredFields.validateCreateNewBankAcc(ownerID, kind);
+            InputRequiredFields.validateCreateNewBankAcc(OwnerID.getText(), KindBankAccount.getValue());
+            InvalidIInput.validateOwnerID(OwnerID.getText());
 
+            String accountNumber = No.accountNumber;
+            String ownerID = OwnerID.getText();
+            double balance = 0.0;
+            LocalDate dateCreate = Systems.localDate;
+            int point = 0;
+            String kind = KindBankAccount.getValue();
             switch (kind) {
 
                 case "CurrentAccount" -> {
@@ -102,16 +103,24 @@ public class CreateNewBankAccountPageCLR implements Initializable {
                 }
             }
 
-        }
-        catch (InputRequiredFields e) {
+        } catch (InputRequiredFields e) {
+
+            e.printStackTrace();
 
             Alert errorAlert1 = new Alert(Alert.AlertType.ERROR);
             errorAlert1.setHeaderText("Input The Required Fields... :(");
             errorAlert1.setContentText("OwnerID and Kind Field Must Be Input.");
             errorAlert1.showAndWait();
 
+        } catch (InvalidIInput e) {
             e.printStackTrace();
+
+            Alert errorAlert1 = new Alert(Alert.AlertType.ERROR);
+            errorAlert1.setHeaderText("Input The Invalid Information... :(");
+            errorAlert1.setContentText("Input OwnerID is not Valid.");
+            errorAlert1.showAndWait();
         }
+
 
     }
 

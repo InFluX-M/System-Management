@@ -2,9 +2,9 @@ package com.example.finalpr.Availabilities;
 
 public class Loan {
 
-    private String loanNumber;
+    private final String loanNumber;
     private double amount;
-    private int numberOfInstallments;
+    private final int numberOfInstallments;
     private int numberOfInstallmentsPaid;
     private boolean active;
 
@@ -26,9 +26,6 @@ public class Loan {
     public int getNumberOfInstallments() {
         return numberOfInstallments;
     }
-    public void setNumberOfInstallments(int numberOfInstallments) {
-        this.numberOfInstallments = numberOfInstallments;
-    }
 
     public int getNumberOfInstallmentsPaid() {
         return numberOfInstallmentsPaid;
@@ -46,8 +43,5 @@ public class Loan {
 
     public String getLoanNumber() {
         return loanNumber;
-    }
-    public void setLoanNumber(String loanNumber) {
-        this.loanNumber = loanNumber;
     }
 }

@@ -1,5 +1,6 @@
 package com.example.finalpr;
 
+import com.example.finalpr.Availabilities.Person;
 import com.example.finalpr.MYSQL.MySQL;
 import com.example.finalpr.MYSQL.No;
 import com.example.finalpr.Systems.BankSystem;
@@ -9,12 +10,14 @@ import com.example.finalpr.Systems.Systems;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.PerspectiveCamera;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 
 public class HelloApplication extends Application {
@@ -27,15 +30,14 @@ public class HelloApplication extends Application {
     static {
         try {
             systems = Systems.getInstanceSystems(bankSystem, civilRegistrationSystem, documentRegistrationSystem);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
 
     @Override
     public void start(Stage stage) throws IOException, SQLException {
+
 
         if(civilRegistrationSystem.LoadPeople() && documentRegistrationSystem.loadEstates() && bankSystem.loadBankAccount()) {
 

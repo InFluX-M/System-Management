@@ -12,8 +12,7 @@ public class CivilRegistrationSystem {
 
     public static LocalDate localDate;
 
-    private Person nowPerson;
-    private ArrayList<Person> people;
+    private final ArrayList<Person> people;
     private static CivilRegistrationSystem singletonCivilRegistrationSystem;
 
     private CivilRegistrationSystem(){
@@ -60,37 +59,8 @@ public class CivilRegistrationSystem {
         return null;
     }
 
-    public Person getNowPerson() {
-        return nowPerson;
-    }
-    public void setNowPerson(Person nowPerson) {
-        this.nowPerson = nowPerson;
-    }
-
     public ArrayList<Person> getPeople() {
         return people;
-    }
-    public void setPeople(ArrayList<Person> people) {
-        this.people = people;
-    }
-
-    public static CivilRegistrationSystem getSingletonCivilRegistrationSystem() {
-        return singletonCivilRegistrationSystem;
-    }
-    public static void setSingletonCivilRegistrationSystem(CivilRegistrationSystem singletonCivilRegistrationSystem) {
-        CivilRegistrationSystem.singletonCivilRegistrationSystem = singletonCivilRegistrationSystem;
-    }
-
-    public boolean loginPerson(String ID, String name){
-
-        for(Person person : people){
-            if(ID.equals(person.getID()) && name.equals(person.getName())){
-                this.nowPerson = person;
-                return true;
-            }
-        }
-
-        return false;
     }
 
 }

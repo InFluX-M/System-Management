@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="LoanItem" prefHeight="34.0" prefWidth="464.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="LoanNumber" prefHeight="34.0" prefWidth="88.0" style="-fx-background-color: #CCCCFF;" text="LoanNumber" />
+      <Label fx:id="NoInstallments" layoutX="182.0" prefHeight="34.0" prefWidth="94.0" style="-fx-background-color: #CCCCFF;" text="No Installments" />
+      <Label fx:id="Amount" layoutX="88.0" prefHeight="34.0" prefWidth="94.0" style="-fx-background-color: #CCCCFF;" text="Amount" />
+      <Label fx:id="NoInstallmentsPaid" layoutX="276.0" prefHeight="34.0" prefWidth="136.0" style="-fx-background-color: #CCCCFF;" text="No Installments Paid" />
+      <Label fx:id="Active" layoutX="412.0" prefHeight="34.0" prefWidth="50.0" style="-fx-background-color: #CCCCFF;" text="Active" />
+   </children>
+</AnchorPane>

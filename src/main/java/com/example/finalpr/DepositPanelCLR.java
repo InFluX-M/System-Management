@@ -1,5 +1,6 @@
 package com.example.finalpr;
 
+import com.example.finalpr.Exceptions.InvalidProcess;
 import com.example.finalpr.Exceptions.InvalidType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -47,6 +48,8 @@ public class DepositPanelCLR {
             InvalidType.validateMoneyAmount(Amount.getText());
             double amount = Double.parseDouble(Amount.getText());
 
+            InvalidProcess.validateDeposit(amount);
+
             if (systems.deposit(amount)) {
                 status.setText("Deposited Successfully... :)");
             }
@@ -57,6 +60,13 @@ public class DepositPanelCLR {
             Alert errorAlert1 = new Alert(Alert.AlertType.ERROR);
             errorAlert1.setHeaderText("Input The Invalid Type... :(");
             errorAlert1.setContentText("Amount Must be Number Type.");
+            errorAlert1.showAndWait();
+        } catch (InvalidProcess e) {
+
+            e.printStackTrace();
+            Alert errorAlert1 = new Alert(Alert.AlertType.ERROR);
+            errorAlert1.setHeaderText("Invalid Deposit... :(");
+            errorAlert1.setContentText("Wallet Balance is Less Than the Amount Entered");
             errorAlert1.showAndWait();
         }
     }

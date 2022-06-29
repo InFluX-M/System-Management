@@ -1,6 +1,7 @@
 package com.example.finalpr;
 
 import com.example.finalpr.Exceptions.InputRequiredFields;
+import com.example.finalpr.Exceptions.InvalidProcess;
 import com.example.finalpr.Exceptions.InvalidType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -50,6 +51,7 @@ public class WithdrawalPanelCLR {
             InvalidType.validateMoneyAmount(Amount.getText());
 
             double amount = Double.parseDouble(Amount.getText());
+            InvalidProcess.validateWithdrawal(amount);
 
             if(systems.withdrawal(amount)){
                 status.setText("Withdrawal Successfully... :)");
@@ -70,6 +72,15 @@ public class WithdrawalPanelCLR {
             Alert errorAlert1 = new Alert(Alert.AlertType.ERROR);
             errorAlert1.setHeaderText("Input The Required Fields... :(");
             errorAlert1.setContentText("Amount Must Be Input.");
+            errorAlert1.showAndWait();
+
+        } catch (InvalidProcess e) {
+
+            e.printStackTrace();
+
+            Alert errorAlert1 = new Alert(Alert.AlertType.ERROR);
+            errorAlert1.setHeaderText("Invalid Withdrawal... :(");
+            errorAlert1.setContentText("Account Balance is Less Than the Amount Entered");
             errorAlert1.showAndWait();
         }
     }

@@ -12,9 +12,6 @@ public class Wallet {
         this.money = 0.0;
     }
 
-    public ArrayList<BankCard> getBankCards() {
-        return bankCards;
-    }
     public void setBankCards(ArrayList<BankCard> bankCards) {
         this.bankCards = bankCards;
     }

@@ -13,25 +13,15 @@ public class BankSystem{
 
     private static BankSystem singletonBankSystem;
     private BankAccount nowBankAccount;
-    private ArrayList<CurrentAccount> currentBankAccounts;
-    private ArrayList<SavingAccount> savingAccounts;
-    private ArrayList<GoodLoanAccount> goodLoanAccounts;
+    private final ArrayList<CurrentAccount> currentBankAccounts;
+    private final ArrayList<SavingAccount> savingAccounts;
+    private final ArrayList<GoodLoanAccount> goodLoanAccounts;
 
     private BankSystem(){
         this.savingAccounts = new ArrayList<>();
         this.goodLoanAccounts = new ArrayList<>();
         this.currentBankAccounts = new ArrayList<>();
         singletonBankSystem = this;
-    }
-
-    public String getCheckNumber(){
-
-        int i=0;
-        for(CurrentAccount currentAccount : currentBankAccounts){
-            i+=currentAccount.getChecksSent().size();
-        }
-
-        return i+"";
     }
 
     public BankAccount searchBankAccount(String accountNumber){
@@ -44,39 +34,6 @@ public class BankSystem{
             if(accountNumber.equals(bankAccount.getAccountNumber())) return bankAccount;
         }
         return null;
-    }
-
-    public String getLoanNumber(){
-        int i=1;
-        ArrayList<BankAccount> bankAccounts = new ArrayList<>();
-        bankAccounts.addAll(currentBankAccounts);
-        bankAccounts.addAll(savingAccounts);
-        bankAccounts.addAll(goodLoanAccounts);
-        for(BankAccount bankAccount : bankAccounts){
-            i+=bankAccount.getLoans().size();
-        }
-        return i+"";
-    }
-
-    public String getBankCardInformation(){
-        int cardNumber = 0;
-        int CVV2 = 0;
-
-        for(CurrentAccount currentAccount : currentBankAccounts){
-            if(currentAccount.getBankCard() != null){
-                cardNumber++;
-                CVV2++;
-            }
-        }
-        for(GoodLoanAccount goodLoanAccount : goodLoanAccounts){
-            if(goodLoanAccount.getBankCard() != null){
-                cardNumber++;
-                CVV2++;
-            }
-        }
-
-        return (6000000000000000L+cardNumber)+","+(500+CVV2);
-
     }
 
     public boolean loadBankAccount() throws SQLException {
@@ -143,7 +100,6 @@ public class BankSystem{
         CurrentBankAccounts.insertCurrentBankAccounts(currentAccount.getAccountNumber(), currentAccount.getOwnerID(), currentAccount.getBalance(), currentAccount.getDateCreate(), currentAccount.getPoint());
         return currentBankAccounts.add(currentAccount);
     }
-
     public boolean addSavingAccount(SavingAccount savingAccount){
         SavingBankAccounts.insertSavingBankAccounts(savingAccount.getAccountNumber(), savingAccount.getOwnerID(), savingAccount.getBalance(), savingAccount.getDateCreate(), savingAccount.getPoint(), savingAccount.getBankInterestPercentage(), savingAccount.getKindBankInterestPercentage(), savingAccount.getDesignatedTime());
         return savingAccounts.add(savingAccount);

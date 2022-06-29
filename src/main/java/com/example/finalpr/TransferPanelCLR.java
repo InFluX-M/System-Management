@@ -2,6 +2,7 @@ package com.example.finalpr;
 
 import com.example.finalpr.Exceptions.InputRequiredFields;
 import com.example.finalpr.Exceptions.InvalidIInput;
+import com.example.finalpr.Exceptions.InvalidProcess;
 import com.example.finalpr.Exceptions.InvalidType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -58,6 +59,8 @@ public class TransferPanelCLR {
             double amount = Double.parseDouble(Amount.getText());
             String accNoR = AccountNumber.getText();
 
+            InvalidProcess.validateTransfer(amount);
+
             if(systems.transfer(amount, accNoR)){
                 status.setText("Transfer Successfully... :)");
             }
@@ -82,12 +85,20 @@ public class TransferPanelCLR {
 
         } catch (InputRequiredFields e) {
 
+            e.printStackTrace();
             Alert errorAlert1 = new Alert(Alert.AlertType.ERROR);
             errorAlert1.setHeaderText("Input The Required Fields... :(");
             errorAlert1.setContentText("Account Number Amount Must Be Input.");
             errorAlert1.showAndWait();
 
             e.printStackTrace();
+        } catch (InvalidProcess e) {
+
+            e.printStackTrace();
+            Alert errorAlert1 = new Alert(Alert.AlertType.ERROR);
+            errorAlert1.setHeaderText("Invalid Transfer... :(");
+            errorAlert1.setContentText("Account Balance is Less Than the Amount Entered");
+            errorAlert1.showAndWait();
         }
 
 

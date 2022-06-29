@@ -1,7 +1,11 @@
 package com.example.finalpr;
 
+import com.example.finalpr.Availabilities.Loan;
 import com.example.finalpr.Availabilities.SavingAccount;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXListView;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -29,6 +33,15 @@ public class StatusPageCLR implements Initializable {
     private Label status;
 
     @FXML
+    private Label Balance;
+
+    @FXML
+    private JFXListView<Loan> ListLoan;
+
+    @FXML
+    private Label Point;
+
+    @FXML
     void Back(MouseEvent event) {
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("BankAccountPanel.fxml")));
@@ -51,13 +64,19 @@ public class StatusPageCLR implements Initializable {
 
     }
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        Balance.setText("Balance: "+bankSystem.getNowBankAccount().getBalance()+"$");
+        Point.setText("Point: "+bankSystem.getNowBankAccount().getPoint());
 
         if(!(bankSystem.getNowBankAccount() instanceof SavingAccount)){
             GetSavingMoney.setDisable(true);
         }
 
+        ObservableList<Loan> loans = FXCollections.observableArrayList(bankSystem.getNowBankAccount().getLoans());
+
+        ListLoan.setItems(loans);
+        ListLoan.setCellFactory(param -> new LoanCell());
     }
 }

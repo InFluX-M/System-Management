@@ -8,7 +8,7 @@ abstract public class BankAccount {
     private String accountNumber;
     private String ownerID;
     private double balance;
-    private LocalDate dateCreate;
+    private final LocalDate dateCreate;
     private int point;
     private ArrayList<Loan> loans;
 
@@ -44,9 +44,6 @@ abstract public class BankAccount {
 
     public LocalDate getDateCreate() {
         return dateCreate;
-    }
-    public void setDateCreate(LocalDate dateCreate) {
-        this.dateCreate = dateCreate;
     }
 
     public int getPoint() {

@@ -25,13 +25,5 @@ public class InvalidType extends Exception{
         }
     }
 
-    static void validateBankInterestPercentage(BankInterestPercentage bankInterestPercentage) throws InvalidType {
-        if(bankInterestPercentage != BankInterestPercentage.SPECIAL &&
-            bankInterestPercentage != BankInterestPercentage.LONG_TERM &&
-            bankInterestPercentage != BankInterestPercentage.SHORT_TERM) {
-
-            throw new InvalidType("Invalid Bank Interest Percentage Kind");
-        }
-    }
 
 }
