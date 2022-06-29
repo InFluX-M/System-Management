@@ -2,6 +2,8 @@ package com.example.finalpr;
 
 import com.example.finalpr.Availabilities.Person;
 
+import com.example.finalpr.Exceptions.InputRequiredFields;
+import com.example.finalpr.Exceptions.InvalidType;
 import com.example.finalpr.MYSQL.No;
 import com.jfoenix.controls.JFXComboBox;
 import javafx.fxml.FXML;
@@ -10,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -59,15 +62,36 @@ public class RegisterCRSPageCLR implements Initializable {
     @FXML
     void register(){
 
-        String ID = No.ID;
-        String name = Name.getText();
-        int age = Integer.parseInt(Age.getText());
-        String sex = Sex.getValue();
+        try {
+            InputRequiredFields.validateRegisterPerson(Name.getText(), Age.getText(), Sex.getValue());
+            InvalidType.validateAge(Age.getText());
 
-        if(civilRegistrationSystem.addPerson(new Person(ID, name, age, sex))){
+            String ID = No.ID;
+            String name = Name.getText();
+            int age = Integer.parseInt(Age.getText());
+            String sex = Sex.getValue();
 
-            labelRegister.setTextAlignment(TextAlignment.CENTER);
-            labelRegister.setText("Person Registered Successfully... :)");
+            if(civilRegistrationSystem.addPerson(new Person(ID, name, age, sex))){
+
+                labelRegister.setTextAlignment(TextAlignment.CENTER);
+                labelRegister.setText("Person Registered Successfully... :)");
+            }
+
+        } catch (InvalidType e) {
+            e.printStackTrace();
+
+            Alert errorAlert1 = new Alert(Alert.AlertType.ERROR);
+            errorAlert1.setHeaderText("Input The Invalid Type... :(");
+            errorAlert1.setContentText("Age Must be Integer Number Type.");
+            errorAlert1.showAndWait();
+
+        } catch (InputRequiredFields e) {
+            e.printStackTrace();
+
+            Alert errorAlert1 = new Alert(Alert.AlertType.ERROR);
+            errorAlert1.setHeaderText("Input The Required Fields... :(");
+            errorAlert1.setContentText("ID, Name, Age, Sex Must Be Input.");
+            errorAlert1.showAndWait();
         }
 
     }

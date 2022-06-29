@@ -89,12 +89,10 @@ public class CivilRegistrationSystemPageCLR implements Initializable {
 
     }
 
-
     @FXML
     void exit() {
         System.exit(1);
     }
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

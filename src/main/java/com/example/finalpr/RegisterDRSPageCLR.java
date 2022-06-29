@@ -1,6 +1,9 @@
 package com.example.finalpr;
 
 import com.example.finalpr.Availabilities.Estate;
+import com.example.finalpr.Exceptions.InputRequiredFields;
+import com.example.finalpr.Exceptions.InvalidIInput;
+import com.example.finalpr.Exceptions.InvalidType;
 import com.example.finalpr.MYSQL.No;
 import com.example.finalpr.Systems.Systems;
 import com.jfoenix.controls.JFXTextArea;
@@ -10,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -58,17 +62,51 @@ public class RegisterDRSPageCLR implements Initializable {
     @FXML
     void register() {
 
-        String documentRegistrationCode = No.documentRegistrationCode;
-        String ownerID = OwnerID.getText();
-        String address = Address.getText();
-        LocalDate date = Systems.localDate;
-        double cost = Double.parseDouble(Cost.getText());
+        try {
+            InputRequiredFields.validateRegisterEstate(OwnerID.getText(), Address.getText(), Cost.getText());
+            InvalidIInput.validateOwnerID(OwnerID.getText());
+            InvalidType.validateMoneyAmount(Cost.getText());
 
-        Estate estates = new Estate(documentRegistrationCode, ownerID, address, date, cost);
+            String documentRegistrationCode = No.documentRegistrationCode;
+            String ownerID = OwnerID.getText();
+            String address = Address.getText();
+            LocalDate date = Systems.localDate;
+            double cost = Double.parseDouble(Cost.getText());
 
-        if(documentRegistrationSystem.addEstate(estates)){
-            status.setText("Estate Registered Successfully... :)");
+            Estate estates = new Estate(documentRegistrationCode, ownerID, address, date, cost);
+
+            if(documentRegistrationSystem.addEstate(estates)){
+                status.setText("Estate Registered Successfully... :)");
+            }
+
+        } catch (InvalidType e) {
+            e.printStackTrace();
+
+            Alert errorAlert1 = new Alert(Alert.AlertType.ERROR);
+            errorAlert1.setHeaderText("Input The Invalid Type... :(");
+            errorAlert1.setContentText("Cost Must be Number Type.");
+            errorAlert1.showAndWait();
+        } catch (InputRequiredFields e) {
+
+            e.printStackTrace();
+
+            Alert errorAlert1 = new Alert(Alert.AlertType.ERROR);
+            errorAlert1.setHeaderText("Input The Required Fields... :(");
+            errorAlert1.setContentText("OwnerID, Address, Cost Must Be Input.");
+            errorAlert1.showAndWait();
+
+        } catch (InvalidIInput e) {
+
+            e.printStackTrace();
+
+            Alert errorAlert1 = new Alert(Alert.AlertType.ERROR);
+            errorAlert1.setHeaderText("Input The Invalid Information... :(");
+            errorAlert1.setContentText("Input OwnerID is not Valid.");
+            errorAlert1.showAndWait();
+
         }
+
+
     }
 
     @Override

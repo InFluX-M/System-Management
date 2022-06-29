@@ -1,6 +1,9 @@
 package com.example.finalpr;
 
 import com.example.finalpr.Availabilities.BankCheck;
+import com.example.finalpr.Exceptions.InputRequiredFields;
+import com.example.finalpr.Exceptions.InvalidIInput;
+import com.example.finalpr.Exceptions.InvalidType;
 import com.example.finalpr.MYSQL.No;
 import com.example.finalpr.Systems.BankSystem;
 import com.example.finalpr.Systems.Systems;
@@ -10,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -45,17 +49,50 @@ public class GiveCheckPanelCLR implements Initializable {
     @FXML
     void Give() {
 
-        String checkNumber = No.checkNumber;
-        String accountNumberSender = bankSystem.getNowBankAccount().getAccountNumber();
-        String accountNumberReceiver = AccountNumber.getText();
-        double amount = Double.parseDouble(Amount.getText());
-        LocalDate dateRegister = Date.getValue();
+        try {
+            InputRequiredFields.validateGiveCheck(AccountNumber.getText(), Amount.getText(), Date.getValue());
+            InvalidIInput.validateAccountNumber(AccountNumber.getText());
+            InvalidType.validateMoneyAmount(Amount.getText());
 
-        BankCheck bankCheck = new BankCheck(checkNumber, accountNumberSender, accountNumberReceiver, amount, dateRegister);
+            String checkNumber = No.checkNumber;
+            String accountNumberSender = bankSystem.getNowBankAccount().getAccountNumber();
+            String accountNumberReceiver = AccountNumber.getText();
+            double amount = Double.parseDouble(Amount.getText());
+            LocalDate dateRegister = Date.getValue();
 
-        if(bankSystem.giveCheck(bankCheck)){
-            statue.setText("Check Registered Successfully... :)");
+            BankCheck bankCheck = new BankCheck(checkNumber, accountNumberSender, accountNumberReceiver, amount, dateRegister);
+
+            if(bankSystem.giveCheck(bankCheck)){
+                statue.setText("Check Registered Successfully... :)");
+            }
+
+        } catch (InputRequiredFields e) {
+            e.printStackTrace();
+
+            Alert errorAlert1 = new Alert(Alert.AlertType.ERROR);
+            errorAlert1.setHeaderText("Input The Required Fields... :(");
+            errorAlert1.setContentText("AccountNumberReceiver, Amount, Date Must Be Input.");
+            errorAlert1.showAndWait();
+
+        } catch (InvalidType e) {
+            e.printStackTrace();
+
+            Alert errorAlert1 = new Alert(Alert.AlertType.ERROR);
+            errorAlert1.setHeaderText("Input The Invalid Type... :(");
+            errorAlert1.setContentText("Amount Must be Number Type.");
+            errorAlert1.showAndWait();
+
+        } catch (InvalidIInput e) {
+
+            e.printStackTrace();
+
+            Alert errorAlert1 = new Alert(Alert.AlertType.ERROR);
+            errorAlert1.setHeaderText("Input The Invalid Information... :(");
+            errorAlert1.setContentText("Input AccountNumberReceiver is not Valid.");
+            errorAlert1.showAndWait();
         }
+
+
     }
 
     @FXML

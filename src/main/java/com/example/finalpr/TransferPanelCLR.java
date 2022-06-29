@@ -1,10 +1,14 @@
 package com.example.finalpr;
 
+import com.example.finalpr.Exceptions.InputRequiredFields;
+import com.example.finalpr.Exceptions.InvalidIInput;
+import com.example.finalpr.Exceptions.InvalidType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -45,11 +49,47 @@ public class TransferPanelCLR {
     @FXML
     void Transfer() {
 
-        double amount = Double.parseDouble(Amount.getText());
-        String accNoR = AccountNumber.getText();
+        try {
+            InputRequiredFields.validateAmount(Amount.getText());
+            InputRequiredFields.validateAmount(AccountNumber.getText());
 
-        if(systems.transfer(amount, accNoR)){
-            status.setText("Transfer Successfully... :)");
+            InvalidType.validateMoneyAmount(Amount.getText());
+            InvalidIInput.validateAccountNumber(AccountNumber.getText());
+            double amount = Double.parseDouble(Amount.getText());
+            String accNoR = AccountNumber.getText();
+
+            if(systems.transfer(amount, accNoR)){
+                status.setText("Transfer Successfully... :)");
+            }
+
+        } catch (InvalidType e) {
+
+            e.printStackTrace();
+
+            Alert errorAlert1 = new Alert(Alert.AlertType.ERROR);
+            errorAlert1.setHeaderText("Input The Invalid Type... :(");
+            errorAlert1.setContentText("Amount Must be Number Type.");
+            errorAlert1.showAndWait();
+
+        } catch (InvalidIInput g){
+
+            g.printStackTrace();
+
+            Alert errorAlert1 = new Alert(Alert.AlertType.ERROR);
+            errorAlert1.setHeaderText("Input The Invalid Information... :(");
+            errorAlert1.setContentText("Input AccountNumber is not Valid.");
+            errorAlert1.showAndWait();
+
+        } catch (InputRequiredFields e) {
+
+            Alert errorAlert1 = new Alert(Alert.AlertType.ERROR);
+            errorAlert1.setHeaderText("Input The Required Fields... :(");
+            errorAlert1.setContentText("Account Number Amount Must Be Input.");
+            errorAlert1.showAndWait();
+
+            e.printStackTrace();
         }
+
+
     }
 }
