@@ -228,7 +228,6 @@ public class Systems implements Runnable{
                 0.0, savingAccount.getDateCreate(), savingAccount.getPoint(), savingAccount.getBankInterestPercentage(),
                 savingAccount.getKindBankInterestPercentage(), savingAccount.getDesignatedTime());
 
-
     }
 
     @Override
@@ -236,7 +235,7 @@ public class Systems implements Runnable{
 
         while(true){
             try {
-                Thread.sleep(100000);
+                Thread.sleep(1000);
                 changeDay();
                 paidInstallmentsBankAccount();
 
