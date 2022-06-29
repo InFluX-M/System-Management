@@ -5,8 +5,6 @@ import com.example.finalpr.Exceptions.InputRequiredFields;
 import com.example.finalpr.Exceptions.InvalidIInput;
 import com.example.finalpr.Exceptions.InvalidType;
 import com.example.finalpr.MYSQL.No;
-import com.example.finalpr.Systems.BankSystem;
-import com.example.finalpr.Systems.Systems;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;

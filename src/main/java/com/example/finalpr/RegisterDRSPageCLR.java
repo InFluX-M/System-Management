@@ -27,7 +27,6 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 import static com.example.finalpr.HelloApplication.documentRegistrationSystem;
-import static com.example.finalpr.HelloApplication.systems;
 
 public class RegisterDRSPageCLR implements Initializable {
     @FXML
