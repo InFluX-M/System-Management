@@ -4,6 +4,8 @@ import com.example.finalpr.Availabilities.BankCard;
 import com.example.finalpr.Availabilities.CurrentAccount;
 import com.example.finalpr.Availabilities.GoodLoanAccount;
 import com.example.finalpr.MYSQL.No;
+import com.example.finalpr.Systems.BankSystem;
+import com.example.finalpr.Systems.Systems;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -22,6 +24,7 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 import static com.example.finalpr.HelloApplication.bankSystem;
+import static com.example.finalpr.HelloApplication.systems;
 
 public class CardRegistrationPanelCLR implements Initializable {
 
@@ -63,7 +66,7 @@ public class CardRegistrationPanelCLR implements Initializable {
                         e.printStackTrace();
                     }
 
-                    LocalDate expirationDate = LocalDate.now();
+                    LocalDate expirationDate = LocalDate.of(Systems.localDate.getYear()+4, Systems.localDate.getMonth(), Systems.localDate.getDayOfMonth());
                     String CVV2 = null;
                     try {
                         CVV2 = No.getCVV2();
@@ -91,7 +94,7 @@ public class CardRegistrationPanelCLR implements Initializable {
                     e.printStackTrace();
                 }
 
-                LocalDate expirationDate = LocalDate.now();
+                LocalDate expirationDate = LocalDate.of(Systems.localDate.getYear()+4, Systems.localDate.getMonth(), Systems.localDate.getDayOfMonth());
                 String CVV2 = null;
                 try {
                     CVV2 = No.getCVV2();

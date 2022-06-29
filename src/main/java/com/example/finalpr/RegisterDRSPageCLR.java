@@ -2,6 +2,7 @@ package com.example.finalpr;
 
 import com.example.finalpr.Availabilities.Estate;
 import com.example.finalpr.MYSQL.No;
+import com.example.finalpr.Systems.Systems;
 import com.jfoenix.controls.JFXTextArea;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,6 +23,7 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 import static com.example.finalpr.HelloApplication.documentRegistrationSystem;
+import static com.example.finalpr.HelloApplication.systems;
 
 public class RegisterDRSPageCLR implements Initializable {
     @FXML
@@ -59,7 +61,7 @@ public class RegisterDRSPageCLR implements Initializable {
         String documentRegistrationCode = No.documentRegistrationCode;
         String ownerID = OwnerID.getText();
         String address = Address.getText();
-        LocalDate date = LocalDate.now();
+        LocalDate date = Systems.localDate;
         double cost = Double.parseDouble(Cost.getText());
 
         Estate estates = new Estate(documentRegistrationCode, ownerID, address, date, cost);

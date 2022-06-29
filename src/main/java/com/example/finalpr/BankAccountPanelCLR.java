@@ -56,6 +56,8 @@ public class BankAccountPanelCLR implements Initializable {
     @FXML
     private JFXButton PC;
 
+    @FXML
+    private JFXButton L;
 
     @FXML
     void CardRegistration(MouseEvent event) {
@@ -217,6 +219,10 @@ public class BankAccountPanelCLR implements Initializable {
             CR.setDisable(true);
             GC.setDisable(true);
             PC.setDisable(true);
+        }
+
+        if(bankSystem.getNowBankAccount().getPoint() > 5){
+            L.setDisable(true);
         }
 
     }

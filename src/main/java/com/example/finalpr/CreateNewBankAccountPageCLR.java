@@ -6,6 +6,7 @@ import com.example.finalpr.Availabilities.GoodLoanAccount;
 import com.example.finalpr.Availabilities.SavingAccount;
 import com.example.finalpr.Exceptions.InputRequiredFields;
 import com.example.finalpr.MYSQL.No;
+import com.example.finalpr.Systems.Systems;
 import com.jfoenix.controls.JFXComboBox;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -64,7 +65,7 @@ public class CreateNewBankAccountPageCLR implements Initializable {
         String accountNumber = No.accountNumber;
         String ownerID = OwnerID.getText();
         double balance = 0.0;
-        LocalDate dateCreate = LocalDate.now();
+        LocalDate dateCreate = Systems.localDate;
         int point = 0;
         String kind = KindBankAccount.getValue();
 

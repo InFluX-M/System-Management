@@ -14,6 +14,7 @@ public class No {
     static public String accountNumber;
     static public String documentRegistrationCode;
     static public String checkNumber;
+    static public String loanNumber;
 
     static public String getCardNumber() throws SQLException {
 
@@ -25,7 +26,8 @@ public class No {
             long cd = resultSet.getInt("cardNumber");
             String sqlCMD1 = String.format("UPDATE no SET cardNumber=%d", cd+1);
             MySQL.executeSQL(sqlCMD1);
-            return cd+"";
+            cardNumber = cd+"";
+            return cardNumber;
         }
 
         return null;
@@ -41,7 +43,8 @@ public class No {
             long cd = resultSet.getInt("CVV2");
             String sqlCMD1 = String.format("UPDATE no SET CVV2=%d", cd+1);
             MySQL.executeSQL(sqlCMD1);
-            return cd+"";
+            CVV2 = cd+"";
+            return CVV2;
         }
 
         return null;
@@ -57,7 +60,7 @@ public class No {
             String sqlCMD1 = String.format("UPDATE no SET checkNumber=%d", cd+1);
             MySQL.executeSQL(sqlCMD1);
             checkNumber = (cd)+"";
-            return cd+"";
+            return checkNumber;
         }
 
         return null;
@@ -112,6 +115,24 @@ public class No {
         }
 
         return null;
+    }
+
+    static public String getLoanNumber() throws SQLException {
+
+        String sqlCMD = "SELECT loanNumber FROM no";
+        ResultSet resultSet = MySQL.executeQuery(sqlCMD);
+
+        assert resultSet != null;
+        if(resultSet.next()){
+            long cd = resultSet.getInt("loanNumber");
+            String sqlCMD1 = String.format("UPDATE no SET loanNumber=%d", cd+1);
+            MySQL.executeSQL(sqlCMD1);
+            loanNumber = cd+"";
+            return loanNumber;
+        }
+
+        return null;
+
     }
 
     static public LocalDate getDate() throws SQLException {

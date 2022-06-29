@@ -5,6 +5,7 @@ import com.example.finalpr.Exceptions.NotEnoughMoney;
 import com.example.finalpr.MYSQL.*;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import javafx.scene.control.Alert;
 
 import java.io.*;
 import java.sql.SQLException;
@@ -161,7 +162,7 @@ public class Systems implements Runnable{
 
     }
 
-    public boolean paidInstallmentsBankAccount() throws NotEnoughMoney {
+    public boolean paidInstallmentsBankAccount(){
 
         ArrayList<BankAccount> bankAccounts = new ArrayList<>();
         bankAccounts.addAll(bankSystem.getCurrentBankAccounts());
@@ -171,38 +172,45 @@ public class Systems implements Runnable{
         for(BankAccount bankAccount : bankAccounts){
             for(Loan loan : bankAccount.getLoans()){
 
-                double installment = (loan.getAmount() * (1.0+0.1)) / (1.0*loan.getNumberOfInstallments());
-                double money = civilRegistrationSystem.searchPerson(bankAccount.getOwnerID()).getWallet().getMoney() - installment;
+                if(loan.isActive()){
+                    double installment = (loan.getAmount() * (1.0+0.1)) / (1.0*loan.getNumberOfInstallments());
+                    double money = civilRegistrationSystem.searchPerson(bankAccount.getOwnerID()).getWallet().getMoney() - installment;
 
-                if(money >= installment){
-                    civilRegistrationSystem.searchPerson(bankAccount.getOwnerID()).getWallet().setMoney(money);
-                    Wallets.updateWallets(bankAccount.getOwnerID(), money);
-                    boolean active = loan.getNumberOfInstallments() > loan.getNumberOfInstallmentsPaid();
-                    loan.setActive(active);
-                    loan.setNumberOfInstallmentsPaid(loan.getNumberOfInstallmentsPaid()+1);
-                    Loans.updateLoan(loan.getLoanNumber(), loan.getAmount(), loan.getNumberOfInstallments(),
-                            loan.getNumberOfInstallmentsPaid(), loan.isActive(), bankAccount.getAccountNumber());
+                    if(money >= 0){
+                        civilRegistrationSystem.searchPerson(bankAccount.getOwnerID()).getWallet().setMoney(money);
+                        Wallets.updateWallets(bankAccount.getOwnerID(), money);
+                        loan.setNumberOfInstallmentsPaid(loan.getNumberOfInstallmentsPaid()+1);
+                        boolean active = loan.getNumberOfInstallments() > loan.getNumberOfInstallmentsPaid();
+                        loan.setActive(active);
+                        Loans.updateLoan(loan.getLoanNumber(), loan.getAmount(), loan.getNumberOfInstallments(),
+                                loan.getNumberOfInstallmentsPaid(), loan.isActive(), bankAccount.getAccountNumber());
+                    }
+                    else{
+                        bankAccount.setPoint(bankAccount.getPoint()+1);
+
+                        if(bankAccount instanceof CurrentAccount currentAccount){
+                            CurrentBankAccounts.updateCurrentBankAccounts(currentAccount.getAccountNumber(), currentAccount.getOwnerID(),
+                                    currentAccount.getBalance(), currentAccount.getDateCreate(), currentAccount.getPoint());
+                        }
+                        else if(bankAccount instanceof SavingAccount savingAccount){
+                            SavingBankAccounts.updateSavingBankAccounts(savingAccount.getAccountNumber(), savingAccount.getOwnerID(),
+                                    savingAccount.getBalance(), savingAccount.getDateCreate(), savingAccount.getPoint(), savingAccount.getBankInterestPercentage(),
+                                    savingAccount.getKindBankInterestPercentage(), savingAccount.getDesignatedTime());
+                        }
+                        else if(bankAccount instanceof GoodLoanAccount goodLoanAccount){
+                            GoodLoanBankAccounts.updateGoodLoanBankAccounts(goodLoanAccount.getAccountNumber(), goodLoanAccount.getOwnerID(),
+                                    goodLoanAccount.getBalance(), goodLoanAccount.getDateCreate(), goodLoanAccount.getPoint());
+                        }
+
+                        try {
+                            NotEnoughMoney.validate();
+                        } catch (NotEnoughMoney e) {
+
+                            e.printStackTrace();
+                        }
+
+                    }
                 }
-                else{
-                    bankSystem.getNowBankAccount().setPoint(bankSystem.getNowBankAccount().getPoint()+1);
-
-                    if(bankSystem.getNowBankAccount() instanceof CurrentAccount currentAccount){
-                        CurrentBankAccounts.updateCurrentBankAccounts(currentAccount.getAccountNumber(), currentAccount.getOwnerID(),
-                                currentAccount.getBalance(), currentAccount.getDateCreate(), currentAccount.getPoint());
-                    }
-                    else if(bankSystem.getNowBankAccount() instanceof SavingAccount savingAccount){
-                        SavingBankAccounts.updateSavingBankAccounts(savingAccount.getAccountNumber(), savingAccount.getOwnerID(),
-                                savingAccount.getBalance(), savingAccount.getDateCreate(), savingAccount.getPoint(), savingAccount.getBankInterestPercentage(),
-                                savingAccount.getKindBankInterestPercentage(), savingAccount.getDesignatedTime());
-                    }
-                    else if(bankSystem.getNowBankAccount() instanceof GoodLoanAccount goodLoanAccount){
-                        GoodLoanBankAccounts.updateGoodLoanBankAccounts(goodLoanAccount.getAccountNumber(), goodLoanAccount.getOwnerID(),
-                                goodLoanAccount.getBalance(), goodLoanAccount.getDateCreate(), goodLoanAccount.getPoint());
-                    }
-
-                    NotEnoughMoney.validate();
-                }
-
             }
         }
 
@@ -231,14 +239,17 @@ public class Systems implements Runnable{
     @Override
     public void run() {
 
-        try {
-            Thread.sleep(3000000);
-            changeDay();
-            assert paidInstallmentsBankAccount();
+        while(true){
+            try {
+                Thread.sleep(5000);
+                changeDay();
+                paidInstallmentsBankAccount();
 
-        } catch (IOException | InterruptedException | NotEnoughMoney e) {
-            e.printStackTrace();
+            } catch (IOException | InterruptedException e) {
+                e.printStackTrace();
+            }
         }
+
     }
 
     public void changeDay() throws IOException {

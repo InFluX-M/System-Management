@@ -1,5 +1,6 @@
 package com.example.finalpr;
 
+import com.example.finalpr.Systems.Systems;
 import com.jfoenix.controls.JFXTextArea;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -40,7 +41,7 @@ public class EditDRSPageCLR {
         String documentRegistrationCode = DocumentRegistrationCode.getText();
         String ownerID = OwnerID.getText();
         String address = Address.getText();
-        LocalDate date = LocalDate.now();
+        LocalDate date = Systems.localDate;
         double cost = Double.parseDouble(Cost.getText());
 
         if(documentRegistrationSystem.editEstate(documentRegistrationCode, ownerID, address, date, cost)) {

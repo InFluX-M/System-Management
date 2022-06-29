@@ -1,6 +1,7 @@
 package com.example.finalpr;
 
 import com.example.finalpr.Availabilities.Loan;
+import com.example.finalpr.MYSQL.No;
 import com.jfoenix.controls.JFXComboBox;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +16,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -53,7 +55,7 @@ public class LoanPageCLR implements Initializable {
     @FXML
     void register() {
 
-        String loanNumber = bankSystem.getLoanNumber();
+        String loanNumber = No.loanNumber;
         double amount = Double.parseDouble(Amount.getText());
         int numberOfInstallments = InstallmentsPaid.getValue();
         boolean active = true;
@@ -67,6 +69,10 @@ public class LoanPageCLR implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         InstallmentsPaid.getItems().addAll(8,16);
-        LoanNumber.setText(bankSystem.getLoanNumber());
+        try {
+            LoanNumber.setText(No.getLoanNumber());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

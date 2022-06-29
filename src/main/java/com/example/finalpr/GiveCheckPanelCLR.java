@@ -3,6 +3,7 @@ package com.example.finalpr;
 import com.example.finalpr.Availabilities.BankCheck;
 import com.example.finalpr.MYSQL.No;
 import com.example.finalpr.Systems.BankSystem;
+import com.example.finalpr.Systems.Systems;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -44,7 +45,7 @@ public class GiveCheckPanelCLR implements Initializable {
         String accountNumberSender = bankSystem.getNowBankAccount().getAccountNumber();
         String accountNumberReceiver = AccountNumber.getText();
         double amount = Double.parseDouble(Amount.getText());
-        LocalDate dateRegister = BankSystem.localDate;
+        LocalDate dateRegister = Systems.localDate;
 
         BankCheck bankCheck = new BankCheck(checkNumber, accountNumberSender, accountNumberReceiver, amount, dateRegister);
 

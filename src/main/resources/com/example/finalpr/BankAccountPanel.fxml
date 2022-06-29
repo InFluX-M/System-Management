@@ -55,7 +55,7 @@
         <ImageView fx:id="imgC" fitHeight="39.0" fitWidth="52.0" layoutX="22.0" layoutY="262.0" pickOnBounds="true" preserveRatio="true" />
         <ImageView fx:id="imgP" fitHeight="39.0" fitWidth="52.0" layoutX="229.0" layoutY="262.0" pickOnBounds="true" preserveRatio="true" />
         <ImageView fx:id="imgG" fitHeight="39.0" fitWidth="52.0" layoutX="432.0" layoutY="262.0" pickOnBounds="true" preserveRatio="true" />
-      <JFXButton layoutX="14.0" layoutY="353.0" onMouseClicked="#Loans" prefHeight="106.0" prefWidth="182.0" style="-fx-background-color: #616A6B;" text="       Loans">
+      <JFXButton fx:id="L" layoutX="14.0" layoutY="353.0" onMouseClicked="#Loans" prefHeight="106.0" prefWidth="182.0" style="-fx-background-color: #616A6B;" text="       Loans">
          <font>
             <Font name="Segoe UI Light" size="14.0" />
          </font>
