@@ -5,6 +5,7 @@ Bank Management system and Civil Registration system and Document Registration s
 - Dr-Shahgholi
 - July 2022
 
--Java
--JavaFX
--MySQL
+- Object Oriented Programming
+- Java
+- JavaFX
+- MySQL
